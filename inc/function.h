@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   function.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hkovac <hkovac@student.42.fr>              +#+  +:+       +#+        */
+/*   By: maroly <maroly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 18:48:21 by hkovac            #+#    #+#             */
-/*   Updated: 2022/03/17 11:11:43 by hkovac           ###   ########.fr       */
+/*   Updated: 2022/03/17 16:01:07 by maroly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ int		err_exit(t_gbl *gbl);
 /*utils_str.c*/
 int		ft_strncmp(const char *s1, const char *s2, int n);
 /*check_cub.c*/
-void	check_map_head(t_gbl *gbl);
+void	all_param(t_gbl *gbl);
+void	check_map_form(t_gbl *gbl);
 
 #endif

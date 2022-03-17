@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hkovac <hkovac@student.42.fr>              +#+  +:+       +#+        */
+/*   By: maroly <maroly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 18:35:33 by hkovac            #+#    #+#             */
-/*   Updated: 2022/03/17 11:11:40 by hkovac           ###   ########.fr       */
+/*   Updated: 2022/03/17 15:14:20 by maroly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 typedef struct s_gbl
 {
 	char	**map;
+	char	**file;
 	char	*no;
 	char	*so;
 	char	*we;
