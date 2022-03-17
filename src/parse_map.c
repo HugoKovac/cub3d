@@ -6,7 +6,7 @@
 /*   By: maroly <maroly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 18:35:11 by hkovac            #+#    #+#             */
-/*   Updated: 2022/03/17 16:12:41 by maroly           ###   ########.fr       */
+/*   Updated: 2022/03/17 17:30:15 by maroly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,11 @@ int	parse_map(t_gbl *gbl, char *file)
 	count_malloc_tab2d(gbl, fd[0]);
 	fill_tab2d(gbl, fd[1]);
 	find_map(gbl);
+	if (*gbl->map == NULL)
+	{
+		write(2, "Error\n", 6);
+		err_exit(gbl);
+	}
 	all_param(gbl);
 	check_map_form(gbl);
 	return (1);
