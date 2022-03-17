@@ -2,7 +2,8 @@ SRC =	main.c \
 		get_next_line.c get_next_line_u.c \
 		parse_map.c \
 		exit.c \
-		utils_str.c utils_free.c
+		utils_str.c utils_free.c \
+		check_cub.c
 
 NAME =	cub3d
 
