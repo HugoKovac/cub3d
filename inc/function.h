@@ -6,7 +6,7 @@
 /*   By: maroly <maroly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 18:48:21 by hkovac            #+#    #+#             */
-/*   Updated: 2022/03/17 16:01:07 by maroly           ###   ########.fr       */
+/*   Updated: 2022/03/20 23:53:38 by maroly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,5 +32,9 @@ int		ft_strncmp(const char *s1, const char *s2, int n);
 /*check_cub.c*/
 void	all_param(t_gbl *gbl);
 void	check_map_form(t_gbl *gbl);
+void	check_map_char(t_gbl *gbl);
+int		check_char(char c);
+int		count_island(t_gbl *gbl);
+int		is_j_in(char *str, int j);
 
 #endif

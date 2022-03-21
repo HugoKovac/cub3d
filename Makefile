@@ -3,7 +3,9 @@ SRC =	main.c \
 		parse_map.c \
 		exit.c \
 		utils_str.c utils_free.c \
-		check_cub.c
+		check_cub.c	\
+		check_cub2.c	\
+		count_island.c	\
 
 NAME =	cub3d
 

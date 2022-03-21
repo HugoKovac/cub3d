@@ -6,7 +6,7 @@
 /*   By: maroly <maroly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 18:35:11 by hkovac            #+#    #+#             */
-/*   Updated: 2022/03/17 17:30:15 by maroly           ###   ########.fr       */
+/*   Updated: 2022/03/18 13:11:30 by maroly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,5 +120,6 @@ int	parse_map(t_gbl *gbl, char *file)
 	}
 	all_param(gbl);
 	check_map_form(gbl);
+	check_map_char(gbl);
 	return (1);
 }

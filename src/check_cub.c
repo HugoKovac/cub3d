@@ -6,7 +6,7 @@
 /*   By: maroly <maroly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 17:58:23 by hkovac            #+#    #+#             */
-/*   Updated: 2022/03/17 17:27:09 by maroly           ###   ########.fr       */
+/*   Updated: 2022/03/18 14:54:27 by maroly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,84 +52,27 @@ void	all_param(t_gbl *gbl)
 
 int	check_char(char c)
 {
-	if (c != '0' || c != '1' || c != 'N' || c != 'S' || c != 'E' || c != 'W')
-		return (0);
-	return (1);
+	if (c != '0' && c != '1' && c != 'N' && c != 'S' && c != 'E' && c != 'W')
+		return (1);
+	return (0);
 }
 
-int check_map_horizontal(t_gbl *gbl)
+void	check_map_char(t_gbl *gbl)
 {
+	int player;
 	int i;
 	int j;
 
 	i = -1;
+	player = 0;
 	while (gbl->map[++i])
 	{
-		j = 0;
-		while (gbl->map[i][j])
-		{
-			while (gbl->map[i][j] && gbl->map[i][j] == ' ')
-				j++;
-			if (gbl->map[i][j] != '1')
-				return (1);
-			while (gbl->map[i][++j] && gbl->map[i][j] != ' ')
-				if (check_char(gbl->map[i][j]) == 1)
-					return (1);
-			if (gbl->map[i][j - 1] != '1')
-				return (1);
-			if (gbl->map[i][j])
-				j++;
-		}
+		j = -1;
+		while (gbl->map[i][++j])
+			if (gbl->map[i][j] == 'N')
+				player++;
 	}
-	return (0);
-}
-
-int	is_j_sup(char *str, int j)
-{
-	int size;
-
-	size = ft_strlen(str);
-	if (j < size)
-		return (0);
-	return (1);
-}
-
-int check_map_vertical(t_gbl *gbl)
-{
-	int i;
-	int j;
-
-	j = -1;
-	i = 0;
-	while (gbl->map[i][++j])
-	{
-		while (gbl->map[i])
-		{
-			while (gbl->map[i] && is_j_sup(gbl->map[i], j) == 0 && gbl->map[i][j] == ' ')
-				i++;
-			if (gbl->map[i] && is_j_sup(gbl->map[i], j) == 0 && gbl->map[i][j] != '1')
-				return (1);
-			while (gbl->map[i] && is_j_sup(gbl->map[i], j) == 0 && gbl->map[i][j] != ' ')
-				i++;
-			if (i > 0 && gbl->map[i - 1] && is_j_sup(gbl->map[i - 1], j) == 0
-				&& gbl->map[i - 1][j] != '1' && gbl->map[i - 1][j] != ' ')
-				return (1);
-			if (gbl->map[i])
-				i++;
-		}
-		i = 0;
-	}
-	return (0);
-}
-
-void check_map_form(t_gbl *gbl)
-{
-	if (check_map_horizontal(gbl) == 1)
-	{
-		write(2, "Error\n", 6);
-		err_exit(gbl);
-	}
-	if (check_map_vertical(gbl) == 1)
+	if (player != 1)
 	{
 		write(2, "Error\n", 6);
 		err_exit(gbl);
