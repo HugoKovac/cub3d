@@ -6,7 +6,7 @@
 /*   By: maroly <maroly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 17:58:23 by hkovac            #+#    #+#             */
-/*   Updated: 2022/03/18 14:54:27 by maroly           ###   ########.fr       */
+/*   Updated: 2022/03/21 14:52:32 by maroly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,8 @@ void	check_map_char(t_gbl *gbl)
 	{
 		j = -1;
 		while (gbl->map[i][++j])
-			if (gbl->map[i][j] == 'N')
+			if (gbl->map[i][j] == 'N' || gbl->map[i][j] == 'E'
+				|| gbl->map[i][j] == 'S' || gbl->map[i][j] == 'W')
 				player++;
 	}
 	if (player != 1)
