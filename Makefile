@@ -6,12 +6,14 @@ SRC =	main.c \
 		check_cub.c	\
 		check_cub2.c	\
 		count_island.c	\
+		ray_casting.c \
+		draw.c \
 
 NAME =	cub3d
 
-MLX_DIR = minilibx-linux
+MLX_DIR = mlx
 MLX = libmlx.a 
-CC = clang
+CC = gcc
 
 # diff entre .a et .dylib
 # .a = lib static, les fonctions utilisees sont directement ecrite dans le binaire
@@ -39,10 +41,11 @@ all:
 # -L donner le nom du dossier / -l donner le nom le la lib
 # loader path = ecrit le chemin de la mlx dans le binaire pour pouvoir la retrouver au moment ou on lance le binaire
 $(NAME): $(OBJ)
-		${CC} $(CFLAGS) -o $(NAME) $(OBJ) #-L $(MLX_DIR) -lmlx -lm -lbsd -lX11 -lXext
+		${CC} $(CFLAGS) -o $(NAME) $(OBJ) -L $(MLX_DIR) -lmlx -lm -lbsd -lX11 -lXext
 
 # si le .c est plus recent que le .o on rentre dans la regle
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | .gitignore
+		# make -C $(MLX_DIR)
 		@mkdir -p $(OBJ_DIR)
 		${CC} $(CFLAGS) -I $(INC_DIR) -I $(MLX_DIR) -c $< -o $@
 

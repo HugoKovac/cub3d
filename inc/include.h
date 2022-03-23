@@ -6,7 +6,7 @@
 /*   By: maroly <maroly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 18:36:24 by hkovac            #+#    #+#             */
-/*   Updated: 2022/03/22 15:45:41 by maroly           ###   ########.fr       */
+/*   Updated: 2022/03/23 16:30:18 by maroly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@
 # include <fcntl.h>
 # include <stdio.h>
 # include <math.h>
+# include <mlx.h>
 # include "struct.h"
 # include "function.h"
 

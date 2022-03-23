@@ -6,7 +6,7 @@
 /*   By: maroly <maroly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 15:44:08 by hkovac            #+#    #+#             */
-/*   Updated: 2022/03/17 16:16:50 by maroly           ###   ########.fr       */
+/*   Updated: 2022/03/23 17:19:40 by maroly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ int	err_exit(t_gbl *gbl)
 		free(gbl->f);
 	if (gbl->c)
 		free(gbl->c);
+	//free_mlx();//a faire
 	free(gbl);
 	exit (1);
 }
