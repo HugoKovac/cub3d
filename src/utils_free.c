@@ -6,7 +6,7 @@
 /*   By: hkovac <hkovac@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 15:48:50 by hkovac            #+#    #+#             */
-/*   Updated: 2022/03/24 10:32:20 by hkovac           ###   ########.fr       */
+/*   Updated: 2022/03/24 15:14:38 by hkovac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,9 +55,11 @@ int	end_free(t_gbl *gbl)
 		free(gbl->f);
 	if (gbl->c)
 		free(gbl->c);
-	close_tex(gbl->tex);
 	if (gbl->tex)
+	{
+		close_tex(gbl->tex);
 		free(gbl->tex);
+	}		
 	//free_mlx();//a faire
 	free(gbl);
 	return (0);

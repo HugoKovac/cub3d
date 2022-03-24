@@ -6,7 +6,7 @@
 /*   By: hkovac <hkovac@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 15:09:37 by maroly            #+#    #+#             */
-/*   Updated: 2022/03/24 13:14:42 by hkovac           ###   ########.fr       */
+/*   Updated: 2022/03/24 16:20:45 by hkovac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,10 @@ static void	trace_stripe(t_rc *rc, t_mlx *mlx, int x)
 	t_pos beg;
 	t_pos end;
 
-	rc->lineheight = (int)(WALL_HEIGHT / rc->perpWall);
+	if (rc->perpWall != 0)
+		rc->lineheight = (int)(WALL_HEIGHT / rc->perpWall);
+	else
+		rc->lineheight = (int)WALL_HEIGHT;
 	rc->drawstart = -rc->lineheight / 2 + WALL_HEIGHT / 2;
 	if (rc->drawstart < 0)
 		rc->drawstart = 0;
@@ -54,7 +57,6 @@ static void trace_ray(t_rc *rc, t_gbl *gbl)
         if(gbl->map[rc->mapY][rc->mapX] == '1')
 			rc->hit = 1;
 	}
-	//printf("%f | %f\n", rc->sideX, rc->sideY);
 	if (rc->side == 0)
 		rc->perpWall = rc->sideX - rc->deltaX;
 	else
@@ -70,7 +72,6 @@ static void	find_side(t_rc *rc)
 	}
 	else
 	{
-		// printf("%d %f %f\n", rc->mapX, rc->posX, rc->deltaX);
 		rc->stepX = 1;
 		rc->sideX = (rc->mapX + 1.0 - rc->posX) * rc->deltaX;
 	}
@@ -90,11 +91,11 @@ static void init_calcul(t_rc *rc, int x)
 {
 	rc->hit = 0;
 	rc->cameraX = 2 * x / (double)WALL_WIDTH - 1;
-	if (rc->has_dir_changed == false)
-	{
+	//if (rc->has_dir_changed == false)
+	//{
 		rc->rayDirX = rc->dirX + rc->planeX * rc->cameraX;
 		rc->rayDirY = rc->dirY + rc->planeY * rc->cameraX;
-	}
+	//}
 	rc->mapX = (int)rc->posX;//arrondir?
 	rc->mapY = (int)rc->posY;//arrondir?
 	if (rc->rayDirX == 0)
@@ -113,8 +114,6 @@ static void start(t_rc *rc, t_gbl *gbl)
 	int	x;
 
 	x = 0;
-	//rc->planeX = 0;
-	//rc->planeY = 0.66;
 	while (x < WALL_WIDTH)
 	{
 		init_calcul(rc, x);//calcul side / Δ / cameraX / raydir
@@ -137,8 +136,8 @@ int	find_pos(t_gbl *gbl, t_rc *rc)
 		{
 			if (gbl->map[i][j] == 'N' || gbl->map[i][j] == 'S' ||gbl->map[i][j] == 'W' ||gbl->map[i][j] == 'E')
 			{
-				rc->posX = (float)j;
-				rc->posY = (float)i;
+				rc->posX = (float)j + 0.5;
+				rc->posY = (float)i + 0.5;
 				return (1);
 			}
 		}
@@ -148,6 +147,7 @@ int	find_pos(t_gbl *gbl, t_rc *rc)
 
 static void init_dir(t_gbl *gbl, t_rc *rc)
 {
+
 	if (gbl->map[(int)rc->posY][(int)rc->posX] == 'N')
 	{
 		rc->dirX = 0.0;
@@ -178,18 +178,17 @@ static void init_dir(t_gbl *gbl, t_rc *rc)
 	}
 }
 
-int	destroy_window(t_rc *rc)
+int	destroy_window(t_gbl *gbl)
 {
-	(void)rc;
-	exit(0);
-	//exit(end_free(gbl));
+
+	exit(end_free(gbl));
 }
 
-int	controls(int keycode, t_rc *rc) // on veut recevoir gbl et pas rc pour pouvoir escape tranquilou
+int	controls(int keycode, t_gbl *gbl)
 {
-	//printf("wtf\n");
+	printf("test\n");
 	if (keycode == ESC)
-		destroy_window(rc);
+		destroy_window(gbl);
 	else if (keycode == UP)
 	{
 		
@@ -208,38 +207,39 @@ int	controls(int keycode, t_rc *rc) // on veut recevoir gbl et pas rc pour pouvo
 	}
 	else if (keycode == ARROW_LEFT)
 	{
-		//printf("lol\n");
-		double oldDirX = rc->dirX;
-		rc->dirX = rc->dirX * cos(0.1) - rc-> dirY * sin(0.1);
-		rc->dirY = oldDirX * sin(0.1) + rc->dirY * cos(0.1);
-		double oldPlaneX = rc->planeX;
-		rc->planeX = rc->planeX * cos(0.1) - rc->planeY * sin(0.1);
-		rc->planeY = oldPlaneX * sin(0.1) + rc->planeY * cos(0.1);
-		rc->has_dir_changed = true;
+
+		double oldDirX = gbl->rc->dirX;
+		gbl->rc->dirX = gbl->rc->dirX * cos(0.1) - gbl->rc-> dirY * sin(0.1);
+		gbl->rc->dirY = oldDirX * sin(0.1) + gbl->rc->dirY * cos(0.1);
+		double oldPlaneX = gbl->rc->planeX;
+		gbl->rc->planeX = gbl->rc->planeX * cos(0.1) - gbl->rc->planeY * sin(0.1);
+		gbl->rc->planeY = oldPlaneX * sin(0.1) + gbl->rc->planeY * cos(0.1);
+		//start(gbl->rc, gbl);
 	}
 	else if (keycode == ARROW_RIGHT)
 	{
-		double oldDirX = rc->dirX;
-		rc->dirX = rc->dirX * cos(-0.1) - rc->dirY * sin(-0.1);
-		rc->dirY = oldDirX * sin(-0.1) + rc->dirY * cos(-0.1);
-		double oldPlaneX = rc->planeX;
-		rc->planeX = rc->planeX * cos(-0.1) - rc->planeY * sin(-0.1);
-		rc->planeY = oldPlaneX * sin(-0.1) + rc->planeY * cos(-0.1);
-		rc->has_dir_changed = true;
+		double oldDirX = gbl->rc->dirX;
+		gbl->rc->dirX = gbl->rc->dirX * cos(-0.1) - gbl->rc->dirY * sin(-0.1);
+		gbl->rc->dirY = oldDirX * sin(-0.1) + gbl->rc->dirY * cos(-0.1);
+		double oldPlaneX = gbl->rc->planeX;
+		gbl->rc->planeX = gbl->rc->planeX * cos(-0.1) - gbl->rc->planeY * sin(-0.1);
+		gbl->rc->planeY = oldPlaneX * sin(-0.1) + gbl->rc->planeY * cos(-0.1);
+		//start(gbl->rc, gbl);
 	}
-	return (0);
+	return (1);
 }
 
 int ray_casting(t_gbl *gbl)
 {
 	t_rc rc;
+
+	gbl->rc = &rc;
 	if (!find_pos(gbl, &rc))
 		return (0);
 	init_dir(gbl, &rc);
 	start(&rc, gbl);
 	mlx_put_image_to_window(gbl->mlx->mlx, gbl->mlx->mlx_win, gbl->mlx->img, 0, 0);
-	mlx_hook(gbl->mlx->mlx_win, 2, 0, controls, &rc);
-	mlx_hook(gbl->mlx->mlx_win, 17, 0, destroy_window, &rc);
-	mlx_loop(gbl->mlx->mlx);
+	mlx_hook(gbl->mlx->mlx_win, 2, 0,controls, gbl);
+	mlx_hook(gbl->mlx->mlx_win, 17, 0, destroy_window, gbl);
 	return (1);
 }

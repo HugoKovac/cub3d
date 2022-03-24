@@ -6,7 +6,7 @@
 /*   By: hkovac <hkovac@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 18:35:33 by hkovac            #+#    #+#             */
-/*   Updated: 2022/03/24 13:11:14 by hkovac           ###   ########.fr       */
+/*   Updated: 2022/03/24 14:09:32 by hkovac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ typedef struct s_gbl
 	char	*c;
 	t_tex	*tex;
 	t_mlx	*mlx;
-	t_rc	rc;
+	t_rc	*rc;
 }	t_gbl;
 
 typedef struct s_pos

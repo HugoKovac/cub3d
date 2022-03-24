@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_cub2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maroly <maroly@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hkovac <hkovac@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 14:12:55 by maroly            #+#    #+#             */
-/*   Updated: 2022/03/21 14:42:34 by maroly           ###   ########.fr       */
+/*   Updated: 2022/03/24 15:15:30 by hkovac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,9 +114,9 @@ void check_map_form(t_gbl *gbl)
 		write(2, "Error\n", 6);
 		err_exit(gbl);
 	}
-	if (count_island(gbl) > 1)
-	{
-		write(2, "Error\n", 6);
-		err_exit(gbl);
-	}
+	// if (count_island(gbl) > 1)
+	// {
+	// 	write(2, "Error\n", 6);
+	// 	err_exit(gbl);
+	// }
 }
