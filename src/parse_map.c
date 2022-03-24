@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maroly <maroly@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hkovac <hkovac@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 18:35:11 by hkovac            #+#    #+#             */
-/*   Updated: 2022/03/18 13:11:30 by maroly           ###   ########.fr       */
+/*   Updated: 2022/03/24 10:17:36 by hkovac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void	open_fd(t_gbl *gbl, int fd[2], char *file)
 	fd[1] = open(file, O_RDONLY);
 	if (fd[0] < 0 || fd[1] < 0)
 	{
-		perror("cub3d (parse_map.c)");
+		perror("Error\nOpen map");
 		err_exit(gbl);
 	}
 }
@@ -115,7 +115,7 @@ int	parse_map(t_gbl *gbl, char *file)
 	find_map(gbl);
 	if (*gbl->map == NULL)
 	{
-		write(2, "Error\n", 6);
+		perror("Error\nFind map");
 		err_exit(gbl);
 	}
 	all_param(gbl);

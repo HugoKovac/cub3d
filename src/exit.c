@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maroly <maroly@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hkovac <hkovac@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 15:44:08 by hkovac            #+#    #+#             */
-/*   Updated: 2022/03/23 17:19:40 by maroly           ###   ########.fr       */
+/*   Updated: 2022/03/24 10:32:36 by hkovac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,9 @@ int	err_exit(t_gbl *gbl)
 		free(gbl->f);
 	if (gbl->c)
 		free(gbl->c);
+	close_tex(gbl->tex);
+	if (gbl->tex)
+		free(gbl->tex);
 	//free_mlx();//a faire
 	free(gbl);
 	exit (1);

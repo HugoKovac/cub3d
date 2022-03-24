@@ -6,7 +6,7 @@
 /*   By: hkovac <hkovac@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 18:22:18 by hkovac            #+#    #+#             */
-/*   Updated: 2022/03/24 09:08:10 by hkovac           ###   ########.fr       */
+/*   Updated: 2022/03/24 10:20:23 by hkovac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,9 @@ int main(int ac, char **av)
 	*gbl = (t_gbl){0};
 	mlx = malloc(sizeof(t_mlx));
 	gbl->mlx = mlx;
-	init_mlx(mlx, 860, 640);
 	parse_map(gbl, av[1]);
+	open_texture(gbl);
+	init_mlx(mlx, 860, 640);
 	if (ray_casting(gbl))
 	{
 		// mlx_loop();

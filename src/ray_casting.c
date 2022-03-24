@@ -6,7 +6,7 @@
 /*   By: hkovac <hkovac@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 15:09:37 by maroly            #+#    #+#             */
-/*   Updated: 2022/03/24 09:23:47 by hkovac           ###   ########.fr       */
+/*   Updated: 2022/03/24 09:52:59 by hkovac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,7 @@ static void init_calcul(t_rc *rc, int x)
 	rc->cameraX = 2 * x / (double)WALL_WIDTH - 1;
 	rc->rayDirX = rc->dirX + rc->planeX * rc->cameraX;
 	rc->rayDirY = rc->dirY + rc->planeY * rc->cameraX;
+	printf("X : %f		Y : %f\n", rc->rayDirX, rc->rayDirY);
 	rc->mapX = (int)rc->posX;//arrondir?
 	rc->mapY = (int)rc->posY;//arrondir?
 	if (rc->rayDirX == 0)
@@ -157,7 +158,7 @@ static void init_dir(t_gbl *gbl, t_rc *rc)
 		rc->dirX = 1;
 		rc->dirY = 0;
 	}
-	else
+	else// W
 	{
 		rc->dirX = -1;
 		rc->dirY = 0;

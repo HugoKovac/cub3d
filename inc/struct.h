@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maroly <maroly@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hkovac <hkovac@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 18:35:33 by hkovac            #+#    #+#             */
-/*   Updated: 2022/03/23 17:29:28 by maroly           ###   ########.fr       */
+/*   Updated: 2022/03/24 10:07:18 by hkovac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,14 @@ typedef struct s_island
 	int count;
 }	t_island;
 
+typedef struct s_tex
+{
+	int	fd_NO;
+	int	fd_SO;
+	int	fd_WE;
+	int	fd_EA;
+}	t_tex;
+
 typedef struct s_gbl
 {
 	char	**map;
@@ -43,6 +51,7 @@ typedef struct s_gbl
 	char	*ea;
 	char	*f;
 	char	*c;
+	t_tex	*tex;
 	t_mlx	*mlx;
 }	t_gbl;
 

@@ -8,6 +8,7 @@ SRC =	main.c \
 		count_island.c	\
 		ray_casting.c \
 		draw.c \
+		open_texture.c \
 
 NAME =	cub3d
 
