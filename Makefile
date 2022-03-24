@@ -34,8 +34,7 @@ DPD = $(addprefix $(OBJ_DIR)/,$(SRC:.c=.d))
 # -C faire make comme si on etait dana le dossier
 # -j multisreder / ameliore la vitesse de compliation
 # Pas de regle opti car makefile mlx pas compatible
-all:
-	@$(MAKE) -j $(NAME)
+all: $(NAME)
 
 # permet de pouvoir comparer la derniere modification de la dep par rapport a la regle
 # -L donner le nom du dossier / -l donner le nom le la lib
@@ -45,7 +44,7 @@ $(NAME): $(OBJ)
 
 # si le .c est plus recent que le .o on rentre dans la regle
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | .gitignore
-		# make -C $(MLX_DIR)
+		make -C $(MLX_DIR)
 		@mkdir -p $(OBJ_DIR)
 		${CC} $(CFLAGS) -I $(INC_DIR) -I $(MLX_DIR) -c $< -o $@
 

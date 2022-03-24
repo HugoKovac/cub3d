@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray_casting.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maroly <maroly@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hkovac <hkovac@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 15:09:37 by maroly            #+#    #+#             */
-/*   Updated: 2022/03/23 18:14:00 by maroly           ###   ########.fr       */
+/*   Updated: 2022/03/24 09:23:47 by hkovac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,20 +102,65 @@ static void init_calcul(t_rc *rc, int x)
 	find_side(rc);
 }
 
-static void calcul_camera_x(t_rc *rc, t_gbl *gbl)
+static void start(t_rc *rc, t_gbl *gbl)
 {
 	int	x;
 
 	x = 0;
 	rc->planeX = 0;
 	rc->planeY = 0.66;
-	rc->dirX = 0, rc->dirY = 0.5;
 	while (x < WALL_WIDTH)
 	{
 		init_calcul(rc, x);//calcul side / Δ / cameraX / raydir
-		trace_ray(rc, gbl);
-		trace_stripe(rc, gbl->mlx, x);
+		trace_ray(rc, gbl);//trace les rayons jusqu'aux murs
+		trace_stripe(rc, gbl->mlx, x);//print srtripe de X dans mxl_img
 		x++;
+	}
+}
+
+int	find_pos(t_gbl *gbl, t_rc *rc)
+{
+	int	i;
+	int	j;
+
+	i = -1;
+	while (gbl->map[++i])
+	{
+		j = -1;
+		while (gbl->map[i][++j])
+		{
+			if (gbl->map[i][j] == 'N' || gbl->map[i][j] == 'S' ||gbl->map[i][j] == 'W' ||gbl->map[i][j] == 'E')
+			{
+				rc->posX = (float)j;
+				rc->posY = (float)i;
+				return (1);
+			}
+		}
+	}
+	return (0);
+}
+
+static void init_dir(t_gbl *gbl, t_rc *rc)
+{
+	if (gbl->map[(int)rc->posY][(int)rc->posX] == 'N')
+	{
+		rc->dirX = 0;
+		rc->dirY = -1;
+	}
+	else if (gbl->map[(int)rc->posY][(int)rc->posX] == 'S')
+	{
+		rc->dirX = 0;
+		rc->dirY = 1;
+	}
+	else if (gbl->map[(int)rc->posY][(int)rc->posX] == 'E')
+	{
+		rc->dirX = 1;
+		rc->dirY = 0;
+	}
+	else
+	{
+		rc->dirX = -1;
+		rc->dirY = 0;
 	}
 }
 
@@ -125,12 +170,15 @@ int ray_casting(t_gbl *gbl)
 	int	done;
 
 	done = 0;
-	rc.posX = 2;
-	rc.posY = 2;
+	// rc.posX = 2;
+	// rc.posY = 2;
+	if (!find_pos(gbl, &rc))
+		return (0);
+	init_dir(gbl, &rc);
 	while (done == 0)// a enlever avec mlx loop ?
 	{
-		calcul_camera_x(&rc, gbl);//calcul de tout le champ de vision
+		start(&rc, gbl);
 		mlx_put_image_to_window(gbl->mlx->mlx, gbl->mlx->mlx_win, gbl->mlx->img, 0, 0);
 	}
-	return (0);
+	return (1);
 }

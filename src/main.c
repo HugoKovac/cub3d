@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maroly <maroly@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hkovac <hkovac@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 18:22:18 by hkovac            #+#    #+#             */
-/*   Updated: 2022/03/23 17:22:45 by maroly           ###   ########.fr       */
+/*   Updated: 2022/03/24 09:08:10 by hkovac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,11 @@ int main(int ac, char **av)
 	gbl->mlx = mlx;
 	init_mlx(mlx, 860, 640);
 	parse_map(gbl, av[1]);
-	ray_casting(gbl);
+	if (ray_casting(gbl))
+	{
+		// mlx_loop();
+		end_free(gbl);
+		return (1);
+	}
 	return (end_free(gbl));
 }
