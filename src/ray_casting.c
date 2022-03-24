@@ -6,7 +6,7 @@
 /*   By: hkovac <hkovac@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 15:09:37 by maroly            #+#    #+#             */
-/*   Updated: 2022/03/24 09:52:59 by hkovac           ###   ########.fr       */
+/*   Updated: 2022/03/24 13:14:42 by hkovac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,10 @@ static void	trace_stripe(t_rc *rc, t_mlx *mlx, int x)
 	beg.y = rc->drawstart;
 	end.x = x;
 	end.y = rc->drawend;
-	draw_line(beg, end, mlx);
+	int color = 0x5F3384;
+	if (rc->side == 1)
+		color /= 2;
+	draw_line(beg, end, mlx, color);
 	
 }
 
@@ -87,9 +90,11 @@ static void init_calcul(t_rc *rc, int x)
 {
 	rc->hit = 0;
 	rc->cameraX = 2 * x / (double)WALL_WIDTH - 1;
-	rc->rayDirX = rc->dirX + rc->planeX * rc->cameraX;
-	rc->rayDirY = rc->dirY + rc->planeY * rc->cameraX;
-	printf("X : %f		Y : %f\n", rc->rayDirX, rc->rayDirY);
+	if (rc->has_dir_changed == false)
+	{
+		rc->rayDirX = rc->dirX + rc->planeX * rc->cameraX;
+		rc->rayDirY = rc->dirY + rc->planeY * rc->cameraX;
+	}
 	rc->mapX = (int)rc->posX;//arrondir?
 	rc->mapY = (int)rc->posY;//arrondir?
 	if (rc->rayDirX == 0)
@@ -108,13 +113,13 @@ static void start(t_rc *rc, t_gbl *gbl)
 	int	x;
 
 	x = 0;
-	rc->planeX = 0;
-	rc->planeY = 0.66;
+	//rc->planeX = 0;
+	//rc->planeY = 0.66;
 	while (x < WALL_WIDTH)
 	{
 		init_calcul(rc, x);//calcul side / Δ / cameraX / raydir
 		trace_ray(rc, gbl);//trace les rayons jusqu'aux murs
-		trace_stripe(rc, gbl->mlx, x);//print srtripe de X dans mxl_img
+		trace_stripe(rc, gbl->mlx, x);//print stripe de X dans mxl_img
 		x++;
 	}
 }
@@ -145,41 +150,96 @@ static void init_dir(t_gbl *gbl, t_rc *rc)
 {
 	if (gbl->map[(int)rc->posY][(int)rc->posX] == 'N')
 	{
-		rc->dirX = 0;
-		rc->dirY = -1;
+		rc->dirX = 0.0;
+		rc->dirY = -1.0;
+		rc->planeX = 0.66;
+		rc->planeY = 0.0;
 	}
 	else if (gbl->map[(int)rc->posY][(int)rc->posX] == 'S')
 	{
-		rc->dirX = 0;
-		rc->dirY = 1;
+		rc->dirX = 0.0;
+		rc->dirY = 1.0;
+		rc->planeX = -0.66;
+		rc->planeY = 0.0;
 	}
 	else if (gbl->map[(int)rc->posY][(int)rc->posX] == 'E')
 	{
-		rc->dirX = 1;
-		rc->dirY = 0;
+		rc->dirX = 1.0;
+		rc->dirY = 0.0;
+		rc->planeX = 0.0;
+		rc->planeY = 0.66;
 	}
 	else// W
 	{
-		rc->dirX = -1;
-		rc->dirY = 0;
+		rc->dirX = -1.0;
+		rc->dirY = 0.0;
+		rc->planeX = 0.0;
+		rc->planeY = -0.66;
 	}
+}
+
+int	destroy_window(t_rc *rc)
+{
+	(void)rc;
+	exit(0);
+	//exit(end_free(gbl));
+}
+
+int	controls(int keycode, t_rc *rc) // on veut recevoir gbl et pas rc pour pouvoir escape tranquilou
+{
+	//printf("wtf\n");
+	if (keycode == ESC)
+		destroy_window(rc);
+	else if (keycode == UP)
+	{
+		
+	}
+	else if (keycode == DOWN)
+	{
+		
+	}
+	else if (keycode == LEFT)
+	{
+		
+	}
+	else if (keycode == RIGHT)
+	{
+		
+	}
+	else if (keycode == ARROW_LEFT)
+	{
+		//printf("lol\n");
+		double oldDirX = rc->dirX;
+		rc->dirX = rc->dirX * cos(0.1) - rc-> dirY * sin(0.1);
+		rc->dirY = oldDirX * sin(0.1) + rc->dirY * cos(0.1);
+		double oldPlaneX = rc->planeX;
+		rc->planeX = rc->planeX * cos(0.1) - rc->planeY * sin(0.1);
+		rc->planeY = oldPlaneX * sin(0.1) + rc->planeY * cos(0.1);
+		rc->has_dir_changed = true;
+	}
+	else if (keycode == ARROW_RIGHT)
+	{
+		double oldDirX = rc->dirX;
+		rc->dirX = rc->dirX * cos(-0.1) - rc->dirY * sin(-0.1);
+		rc->dirY = oldDirX * sin(-0.1) + rc->dirY * cos(-0.1);
+		double oldPlaneX = rc->planeX;
+		rc->planeX = rc->planeX * cos(-0.1) - rc->planeY * sin(-0.1);
+		rc->planeY = oldPlaneX * sin(-0.1) + rc->planeY * cos(-0.1);
+		rc->has_dir_changed = true;
+	}
+	return (0);
 }
 
 int ray_casting(t_gbl *gbl)
 {
 	t_rc rc;
-	int	done;
-
-	done = 0;
-	// rc.posX = 2;
-	// rc.posY = 2;
 	if (!find_pos(gbl, &rc))
 		return (0);
 	init_dir(gbl, &rc);
-	while (done == 0)// a enlever avec mlx loop ?
-	{
-		start(&rc, gbl);
-		mlx_put_image_to_window(gbl->mlx->mlx, gbl->mlx->mlx_win, gbl->mlx->img, 0, 0);
-	}
+	start(&rc, gbl);
+	mlx_put_image_to_window(gbl->mlx->mlx, gbl->mlx->mlx_win, gbl->mlx->img, 0, 0);
+	mlx_hook(gbl->mlx->mlx_win, 2, 0, controls, &rc);
+	mlx_hook(gbl->mlx->mlx_win, 17, 0, destroy_window, &rc);
+	mlx_loop(gbl->mlx->mlx);
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: hkovac <hkovac@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 18:48:21 by hkovac            #+#    #+#             */
-/*   Updated: 2022/03/24 10:20:59 by hkovac           ###   ########.fr       */
+/*   Updated: 2022/03/24 11:35:13 by hkovac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int		is_j_in(char *str, int j);
 int     ray_casting(t_gbl *gbl);
 /*draw.c*/
 void    init_mlx(t_mlx *mlx, int x, int y);
-void	draw_line(t_pos beg, t_pos end, t_mlx *mlx);
+void	draw_line(t_pos beg, t_pos end, t_mlx *mlx, unsigned int color);
 /*open_texture.c*/
 void    open_texture(t_gbl *gbl);
 

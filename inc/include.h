@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   include.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maroly <maroly@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hkovac <hkovac@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 18:36:24 by hkovac            #+#    #+#             */
-/*   Updated: 2022/03/23 16:30:18 by maroly           ###   ########.fr       */
+/*   Updated: 2022/03/24 12:46:30 by hkovac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,13 @@
 # define EA 3
 # define F 4
 # define C 5
+# define UP 13
+# define DOWN 1
+# define LEFT 0
+# define RIGHT 2
+# define ARROW_LEFT 123
+# define ARROW_RIGHT 124
+# define ESC 53
 
 # include <stdlib.h>
 # include <sys/types.h>

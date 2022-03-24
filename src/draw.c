@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maroly <maroly@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hkovac <hkovac@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 16:47:25 by maroly            #+#    #+#             */
-/*   Updated: 2022/03/23 18:04:12 by maroly           ###   ########.fr       */
+/*   Updated: 2022/03/24 11:36:10 by hkovac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int	ter_dw(int f, int s)
 	return (-1);
 }
 
-void	draw_line(t_pos beg, t_pos end, t_mlx *mlx)
+void	draw_line(t_pos beg, t_pos end, t_mlx *mlx, unsigned int color)
 {
 	t_pos	delta;
 	t_pos	sign;
@@ -57,7 +57,7 @@ void	draw_line(t_pos beg, t_pos end, t_mlx *mlx)
 	while (cur.x != end.x || cur.y != end.y)
 	{
 		// printf("%d %d %d %d\n", cur.x, end.x, cur.y, end.y)
-		put_pixel_image(mlx, cur.x, cur.y, 0x5F3384);
+		put_pixel_image(mlx, cur.x, cur.y, color);
 		sign.error[1] = sign.error[0] * 2;
 		if (sign.error[1] > -delta.dy)
 		{
