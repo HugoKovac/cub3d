@@ -12,22 +12,18 @@ SRC =	main.c \
 
 NAME =	cub3d
 
-UNAME =	$(shell uname) 
+UNAME :=	$(shell uname) 
 
 CC = gcc
 
 ifeq ($(UNAME), Darwin)
-
-MLX_DIR = mlx_max
+MLX_DIR = mlx_OG
 MLX = libmlx.a 
-FLAGS2 = -lmlx -lm -lbsd -lX11 -lXext
-
+FLAGS2 = -lmlx -framework OpenGL -framework Appkit
 else
-
 MLX_DIR = mlx
 MLX = libmlx.a 
 FLAGS2 = -lmlx -lm -lbsd -lX11 -lXext
-
 endif
 
 # diff entre .a et .dylib
