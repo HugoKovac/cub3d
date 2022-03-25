@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   function.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hkovac <hkovac@student.42.fr>              +#+  +:+       +#+        */
+/*   By: maroly <maroly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 18:48:21 by hkovac            #+#    #+#             */
-/*   Updated: 2022/03/24 11:35:13 by hkovac           ###   ########.fr       */
+/*   Updated: 2022/03/25 12:11:01 by maroly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,8 @@ void    init_mlx(t_mlx *mlx, int x, int y);
 void	draw_line(t_pos beg, t_pos end, t_mlx *mlx, unsigned int color);
 /*open_texture.c*/
 void    open_texture(t_gbl *gbl);
+/*hook*/
+int	controls(int keycode, t_gbl *gbl);
 
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hkovac <hkovac@student.42.fr>              +#+  +:+       +#+        */
+/*   By: maroly <maroly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 18:22:18 by hkovac            #+#    #+#             */
-/*   Updated: 2022/03/24 15:38:29 by hkovac           ###   ########.fr       */
+/*   Updated: 2022/03/25 13:27:17 by maroly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,13 @@ int main(int ac, char **av)
 	gbl->mlx = mlx;	
 	parse_map(gbl, av[1]);
 	open_texture(gbl);
-	init_mlx(mlx, 860, 640);
-	// if (!ray_casting(gbl))
-	// {
-	// 	end_free(gbl);
-	// 	return (1);
-	// }
-	mlx_loop_hook(gbl->mlx->mlx, ray_casting, gbl);
-	mlx_loop(gbl->mlx->mlx);
+	init_mlx(mlx, WIDTH, HEIGHT);
+	if (!ray_casting(gbl))
+	{
+		end_free(gbl);
+		return (1);
+	}
+	//mlx_loop_hook(gbl->mlx->mlx, ray_casting, gbl);
+	//mlx_loop(gbl->mlx->mlx);
 	return (end_free(gbl));
 }

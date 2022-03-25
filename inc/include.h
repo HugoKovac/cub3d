@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   include.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hkovac <hkovac@student.42.fr>              +#+  +:+       +#+        */
+/*   By: maroly <maroly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 18:36:24 by hkovac            #+#    #+#             */
-/*   Updated: 2022/03/24 14:36:05 by hkovac           ###   ########.fr       */
+/*   Updated: 2022/03/25 17:56:57 by maroly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,11 @@
 # define F 4
 # define C 5
 
+# define WIDTH 860
+# define HEIGHT 640
+
+# define PI 3.1415926
+
 
 # define UP 119
 # define DOWN 115
@@ -30,6 +35,7 @@
 # define ARROW_LEFT 65361
 # define ARROW_RIGHT 65363
 # define ESC 65307
+# define SHIFT 65505
 
 # include <stdlib.h>
 # include <sys/types.h>

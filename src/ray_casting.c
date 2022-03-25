@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray_casting.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hkovac <hkovac@student.42.fr>              +#+  +:+       +#+        */
+/*   By: maroly <maroly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 15:09:37 by maroly            #+#    #+#             */
-/*   Updated: 2022/03/24 16:20:45 by hkovac           ###   ########.fr       */
+/*   Updated: 2022/03/25 18:05:07 by maroly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,11 +91,8 @@ static void init_calcul(t_rc *rc, int x)
 {
 	rc->hit = 0;
 	rc->cameraX = 2 * x / (double)WALL_WIDTH - 1;
-	//if (rc->has_dir_changed == false)
-	//{
-		rc->rayDirX = rc->dirX + rc->planeX * rc->cameraX;
-		rc->rayDirY = rc->dirY + rc->planeY * rc->cameraX;
-	//}
+	rc->rayDirX = rc->dirX + rc->planeX * rc->cameraX;
+	rc->rayDirY = rc->dirY + rc->planeY * rc->cameraX;
 	rc->mapX = (int)rc->posX;//arrondir?
 	rc->mapY = (int)rc->posY;//arrondir?
 	if (rc->rayDirX == 0)
@@ -178,6 +175,14 @@ static void init_dir(t_gbl *gbl, t_rc *rc)
 	}
 }
 
+void    re_win(t_gbl *gbl)
+{
+    mlx_destroy_image(gbl->mlx->mlx, gbl->mlx->img);
+    gbl->mlx->img = mlx_new_image(gbl->mlx->mlx, WIDTH, HEIGHT);
+    gbl->mlx->addr = mlx_get_data_addr(gbl->mlx->img, &gbl->mlx->bpp,
+            &gbl->mlx->line_length, &gbl->mlx->endian);
+}
+
 int	destroy_window(t_gbl *gbl)
 {
 
@@ -186,45 +191,75 @@ int	destroy_window(t_gbl *gbl)
 
 int	controls(int keycode, t_gbl *gbl)
 {
-	printf("test\n");
 	if (keycode == ESC)
 		destroy_window(gbl);
-	else if (keycode == UP)
+	else if (keycode == SHIFT && gbl->rc->speed == 0.150000)
+		gbl->rc->speed *= 2;
+	else if (keycode == SHIFT && gbl->rc->speed == 0.300000)
+		gbl->rc->speed /= 2;
+	if (keycode == UP)
 	{
-		
+		if (gbl->map[(int)(gbl->rc->posY + gbl->rc->dirY * gbl->rc->speed)][(int)gbl->rc->posX] != '1')
+			gbl->rc->posY = gbl->rc->posY + gbl->rc->dirY * gbl->rc->speed;
+		if (gbl->map[(int)gbl->rc->posY][(int)(gbl->rc->posX + gbl->rc->dirX * gbl->rc->speed)] != '1')
+			gbl->rc->posX = gbl->rc->posX + gbl->rc->dirX * gbl->rc->speed;
+		re_win(gbl);
+		start(gbl->rc, gbl);
+		mlx_put_image_to_window(gbl->mlx->mlx, gbl->mlx->mlx_win, gbl->mlx->img, 0, 0);
 	}
 	else if (keycode == DOWN)
 	{
-		
+		if (gbl->map[(int)(gbl->rc->posY - gbl->rc->dirY * gbl->rc->speed)][(int)gbl->rc->posX] != '1')
+			gbl->rc->posY = gbl->rc->posY - gbl->rc->dirY * gbl->rc->speed;
+		if (gbl->map[(int)gbl->rc->posY][(int)(gbl->rc->posX - gbl->rc->dirX * gbl->rc->speed)] != '1')
+			gbl->rc->posX = gbl->rc->posX - gbl->rc->dirX * gbl->rc->speed;
+		re_win(gbl);
+		start(gbl->rc, gbl);
+		mlx_put_image_to_window(gbl->mlx->mlx, gbl->mlx->mlx_win, gbl->mlx->img, 0, 0);
 	}
 	else if (keycode == LEFT)
 	{
-		
+		if (gbl->map[(int)(gbl->rc->posY + (gbl->rc->dirX * sin(-PI / 2) + gbl->rc->dirY * cos(-PI / 2)) * (gbl->rc->speed / 2))][(int)gbl->rc->posX] != '1')
+			gbl->rc->posY += ((gbl->rc->dirX * sin(-PI / 2) + gbl->rc->dirY * cos(-PI / 2)) * (gbl->rc->speed / 2));
+		if (gbl->map[(int)gbl->rc->posY][(int)(gbl->rc->posX + (gbl->rc->dirX * cos(-PI / 2) - gbl->rc->dirY * sin(-PI / 2)) * (gbl->rc->speed / 2))] != '1')
+			gbl->rc->posX += ((gbl->rc->dirX * cos(-PI / 2) - gbl->rc->dirY * sin(-PI / 2)) * (gbl->rc->speed / 2));
+		re_win(gbl);
+		start(gbl->rc, gbl);
+		mlx_put_image_to_window(gbl->mlx->mlx, gbl->mlx->mlx_win, gbl->mlx->img, 0, 0);
 	}
 	else if (keycode == RIGHT)
 	{
-		
+		if (gbl->map[(int)(gbl->rc->posY + (gbl->rc->dirX * sin(PI / 2) + gbl->rc->dirY * cos(PI / 2)) * (gbl->rc->speed / 2))][(int)gbl->rc->posX] != '1')
+			gbl->rc->posY += ((gbl->rc->dirX * sin(PI / 2) + gbl->rc->dirY * cos(PI / 2)) * (gbl->rc->speed / 2));
+		if (gbl->map[(int)gbl->rc->posY][(int)(gbl->rc->posX + (gbl->rc->dirX * cos(PI / 2) - gbl->rc->dirY * sin(PI / 2)) * (gbl->rc->speed / 2))] != '1')
+			gbl->rc->posX += ((gbl->rc->dirX * cos(PI / 2) - gbl->rc->dirY * sin(PI / 2)) * (gbl->rc->speed / 2));
+		re_win(gbl);
+		start(gbl->rc, gbl);
+		mlx_put_image_to_window(gbl->mlx->mlx, gbl->mlx->mlx_win, gbl->mlx->img, 0, 0);
 	}
 	else if (keycode == ARROW_LEFT)
 	{
-
 		double oldDirX = gbl->rc->dirX;
-		gbl->rc->dirX = gbl->rc->dirX * cos(0.1) - gbl->rc-> dirY * sin(0.1);
-		gbl->rc->dirY = oldDirX * sin(0.1) + gbl->rc->dirY * cos(0.1);
+		gbl->rc->dirX = gbl->rc->dirX * cos(-0.03) - gbl->rc-> dirY * sin(-0.03);
+		gbl->rc->dirY = oldDirX * sin(-0.03) + gbl->rc->dirY * cos(-0.03);
 		double oldPlaneX = gbl->rc->planeX;
-		gbl->rc->planeX = gbl->rc->planeX * cos(0.1) - gbl->rc->planeY * sin(0.1);
-		gbl->rc->planeY = oldPlaneX * sin(0.1) + gbl->rc->planeY * cos(0.1);
-		//start(gbl->rc, gbl);
+		gbl->rc->planeX = gbl->rc->planeX * cos(-0.03) - gbl->rc->planeY * sin(-0.03);
+		gbl->rc->planeY = oldPlaneX * sin(-0.03) + gbl->rc->planeY * cos(-0.03);
+		re_win(gbl);
+		start(gbl->rc, gbl);
+		mlx_put_image_to_window(gbl->mlx->mlx, gbl->mlx->mlx_win, gbl->mlx->img, 0, 0);
 	}
 	else if (keycode == ARROW_RIGHT)
 	{
 		double oldDirX = gbl->rc->dirX;
-		gbl->rc->dirX = gbl->rc->dirX * cos(-0.1) - gbl->rc->dirY * sin(-0.1);
-		gbl->rc->dirY = oldDirX * sin(-0.1) + gbl->rc->dirY * cos(-0.1);
+		gbl->rc->dirX = gbl->rc->dirX * cos(0.03) - gbl->rc->dirY * sin(0.03);
+		gbl->rc->dirY = oldDirX * sin(0.03) + gbl->rc->dirY * cos(0.03);
 		double oldPlaneX = gbl->rc->planeX;
-		gbl->rc->planeX = gbl->rc->planeX * cos(-0.1) - gbl->rc->planeY * sin(-0.1);
-		gbl->rc->planeY = oldPlaneX * sin(-0.1) + gbl->rc->planeY * cos(-0.1);
-		//start(gbl->rc, gbl);
+		gbl->rc->planeX = gbl->rc->planeX * cos(0.03) - gbl->rc->planeY * sin(0.03);
+		gbl->rc->planeY = oldPlaneX * sin(0.03) + gbl->rc->planeY * cos(0.03);
+		re_win(gbl);
+		start(gbl->rc, gbl);
+		mlx_put_image_to_window(gbl->mlx->mlx, gbl->mlx->mlx_win, gbl->mlx->img, 0, 0);
 	}
 	return (1);
 }
@@ -237,9 +272,11 @@ int ray_casting(t_gbl *gbl)
 	if (!find_pos(gbl, &rc))
 		return (0);
 	init_dir(gbl, &rc);
+	gbl->rc->speed = 0.15;
 	start(&rc, gbl);
 	mlx_put_image_to_window(gbl->mlx->mlx, gbl->mlx->mlx_win, gbl->mlx->img, 0, 0);
-	mlx_hook(gbl->mlx->mlx_win, 2, 0,controls, gbl);
+	mlx_hook(gbl->mlx->mlx_win, 2, 1L >> 0, controls, gbl);
 	mlx_hook(gbl->mlx->mlx_win, 17, 0, destroy_window, gbl);
+	mlx_loop(gbl->mlx->mlx);
 	return (1);
 }
