@@ -6,7 +6,7 @@
 /*   By: maroly <maroly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 18:35:33 by hkovac            #+#    #+#             */
-/*   Updated: 2022/03/27 19:24:46 by maroly           ###   ########.fr       */
+/*   Updated: 2022/03/28 17:43:13 by maroly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ typedef struct s_mlx
 	int		bpp;
 	int		endian;
 	int		line_length;
+	int		texWidth;
+	int		texHeight;
 }	t_mlx;
 
 typedef struct s_island
@@ -32,14 +34,6 @@ typedef struct s_island
 	int	row;
 	int count;
 }	t_island;
-
-typedef struct s_tex
-{
-	int	fd_NO;
-	int	fd_SO;
-	int	fd_WE;
-	int	fd_EA;
-}	t_tex;
 
 typedef struct s_rc
 {
@@ -75,15 +69,17 @@ typedef struct s_gbl
 {
 	char	**map;
 	char	**file;
+	char	*tex_string[6];
 	char	*no;
 	char	*so;
 	char	*we;
 	char	*ea;
 	char	*f;
 	char	*c;
-	t_tex	*tex;
 	t_mlx	*mlx;
 	t_rc	*rc;
+	t_mlx	**tex_tab;
+
 }	t_gbl;
 
 typedef struct s_pos

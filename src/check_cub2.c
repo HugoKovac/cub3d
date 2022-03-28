@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_cub2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hkovac <hkovac@student.42.fr>              +#+  +:+       +#+        */
+/*   By: maroly <maroly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 14:12:55 by maroly            #+#    #+#             */
-/*   Updated: 2022/03/24 15:15:30 by hkovac           ###   ########.fr       */
+/*   Updated: 2022/03/28 17:19:52 by maroly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,17 +106,17 @@ void check_map_form(t_gbl *gbl)
 {
 	if (check_map_horizontal(gbl) == 1)
 	{
-		write(2, "Error\n", 6);
+		write(2, "Error\nMap not closed\n", ft_strlen("Error\nMap not closed\n"));
 		err_exit(gbl);
 	}
 	if (check_map_vertical(gbl) == 1)
 	{
-		write(2, "Error\n", 6);
+		write(2, "Error\nMap not closed\n", ft_strlen("Error\nMap not closed\n"));
 		err_exit(gbl);
 	}
 	// if (count_island(gbl) > 1)
 	// {
-	// 	write(2, "Error\n", 6);
+	//	write(2, "Error\nToo many island\n", ft_strlen("Error\nToo many island\n"));
 	// 	err_exit(gbl);
 	// }
 }

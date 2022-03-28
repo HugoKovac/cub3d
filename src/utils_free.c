@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_free.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hkovac <hkovac@student.42.fr>              +#+  +:+       +#+        */
+/*   By: maroly <maroly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 15:48:50 by hkovac            #+#    #+#             */
-/*   Updated: 2022/03/24 15:14:38 by hkovac           ###   ########.fr       */
+/*   Updated: 2022/03/28 18:04:35 by maroly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,18 +27,6 @@ void destroy_tab(char **tab)
 	tab = NULL;
 }
 
-void	close_tex(t_tex *tex)
-{
-	if (tex->fd_NO > -1)
-		close (tex->fd_NO);
-	if (tex->fd_SO > -1)
-		close (tex->fd_SO);
-	if (tex->fd_WE > -1)
-		close (tex->fd_WE);
-	if (tex->fd_EA > -1)
-		close (tex->fd_EA);
-}
-
 int	end_free(t_gbl *gbl)
 {
 	if (gbl->file)
@@ -55,11 +43,6 @@ int	end_free(t_gbl *gbl)
 		free(gbl->f);
 	if (gbl->c)
 		free(gbl->c);
-	if (gbl->tex)
-	{
-		close_tex(gbl->tex);
-		free(gbl->tex);
-	}		
 	//free_mlx();//a faire
 	free(gbl);
 	return (0);

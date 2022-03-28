@@ -6,7 +6,7 @@
 /*   By: maroly <maroly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 18:48:21 by hkovac            #+#    #+#             */
-/*   Updated: 2022/03/25 12:11:01 by maroly           ###   ########.fr       */
+/*   Updated: 2022/03/28 18:04:41 by maroly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ int		ft_check(char *str);
 char	*get_next_line(int fd);
 /*utils_free.c*/
 void	destroy_tab(char **tab);
-void    close_tex(t_tex *tex);
 int		end_free(t_gbl *gbl);
 /*parse_map.c*/
 int		parse_map(t_gbl *gbl, char *file);
@@ -46,6 +45,7 @@ int     ray_casting(t_gbl *gbl);
 /*draw.c*/
 void    init_mlx(t_mlx *mlx, int x, int y);
 void	draw_line(t_pos beg, t_pos end, t_mlx *mlx, unsigned int color);
+void    put_pixel_image(t_mlx *mlx, int x, int y, unsigned int color);
 /*open_texture.c*/
 void    open_texture(t_gbl *gbl);
 /*hook*/

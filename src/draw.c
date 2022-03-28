@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hkovac <hkovac@student.42.fr>              +#+  +:+       +#+        */
+/*   By: maroly <maroly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 16:47:25 by maroly            #+#    #+#             */
-/*   Updated: 2022/03/24 16:01:19 by hkovac           ###   ########.fr       */
+/*   Updated: 2022/03/28 16:04:54 by maroly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ void    put_pixel_image(t_mlx *mlx, int x, int y, unsigned int color)
 {
     char    *pixel;
 
-	// printf("%d | %d\n", x, y);
     if (y < mlx->y_size - 1 && x < mlx->x_size - 1 && x >= 0 && y >= 0)
     {
         pixel = mlx->addr + (y * mlx->line_length + x * (mlx->bpp / 8));
