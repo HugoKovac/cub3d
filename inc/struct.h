@@ -6,7 +6,7 @@
 /*   By: maroly <maroly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 18:35:33 by hkovac            #+#    #+#             */
-/*   Updated: 2022/03/25 17:59:15 by maroly           ###   ########.fr       */
+/*   Updated: 2022/03/27 19:24:46 by maroly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ typedef struct s_rc
 	double	planeX;
 	double	planeY;
 	float	speed;
+	bool	is_running;
 	int		hit;
 	int		stepX;
 	int		stepY;

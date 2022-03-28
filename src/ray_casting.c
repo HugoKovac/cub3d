@@ -6,7 +6,7 @@
 /*   By: maroly <maroly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 15:09:37 by maroly            #+#    #+#             */
-/*   Updated: 2022/03/25 18:05:07 by maroly           ###   ########.fr       */
+/*   Updated: 2022/03/28 13:42:50 by maroly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -193,10 +193,19 @@ int	controls(int keycode, t_gbl *gbl)
 {
 	if (keycode == ESC)
 		destroy_window(gbl);
-	else if (keycode == SHIFT && gbl->rc->speed == 0.150000)
-		gbl->rc->speed *= 2;
-	else if (keycode == SHIFT && gbl->rc->speed == 0.300000)
-		gbl->rc->speed /= 2;
+	if (keycode == SHIFT)
+	{
+			if (gbl->rc->is_running == false)
+			{
+				gbl->rc->speed *= 1.6;
+				gbl->rc->is_running = true;
+			}
+			else
+			{
+				gbl->rc->speed /= 1.6;
+				gbl->rc->is_running = false;
+			}
+	}
 	if (keycode == UP)
 	{
 		if (gbl->map[(int)(gbl->rc->posY + gbl->rc->dirY * gbl->rc->speed)][(int)gbl->rc->posX] != '1')
@@ -267,13 +276,16 @@ int	controls(int keycode, t_gbl *gbl)
 int ray_casting(t_gbl *gbl)
 {
 	t_rc rc;
+	//int e = 100, f = 100;
 
 	gbl->rc = &rc;
 	if (!find_pos(gbl, &rc))
 		return (0);
 	init_dir(gbl, &rc);
 	gbl->rc->speed = 0.15;
+	gbl->rc->is_running = false;
 	start(&rc, gbl);
+	//gbl->mlx->img = mlx_xpm_file_to_image(gbl->mlx->mlx, "~/Downloads/Blue9.xpm", &e, &f);
 	mlx_put_image_to_window(gbl->mlx->mlx, gbl->mlx->mlx_win, gbl->mlx->img, 0, 0);
 	mlx_hook(gbl->mlx->mlx_win, 2, 1L >> 0, controls, gbl);
 	mlx_hook(gbl->mlx->mlx_win, 17, 0, destroy_window, gbl);
