@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   function.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maroly <maroly@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hkovac <hkovac@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 18:48:21 by hkovac            #+#    #+#             */
-/*   Updated: 2022/03/28 18:04:41 by maroly           ###   ########.fr       */
+/*   Updated: 2022/03/29 10:07:00 by hkovac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ void	check_map_form(t_gbl *gbl);
 void	check_map_char(t_gbl *gbl);
 int		is_j_in(char *str, int j);
 /*ray_casting.c*/
+void start(t_rc *rc, t_gbl *gbl);
 int     ray_casting(t_gbl *gbl);
 /*draw.c*/
 void    init_mlx(t_mlx *mlx, int x, int y);
@@ -49,6 +50,18 @@ void    put_pixel_image(t_mlx *mlx, int x, int y, unsigned int color);
 /*open_texture.c*/
 void    open_texture(t_gbl *gbl);
 /*hook*/
+int	controls(int keycode, t_gbl *gbl);
+/*texturing.c*/
+int		what_dir(t_gbl *gbl);
+void	stripe_tex(t_gbl *gbl, int x);
+void	trace_stripe(t_gbl *gbl, int x);
+/*init_player.c*/
+int	find_pos(t_gbl *gbl, t_rc *rc);
+void init_dir(t_gbl *gbl, t_rc *rc);
+/*utils_mlx.c*/
+void    re_win(t_gbl *gbl);
+int	destroy_window(t_gbl *gbl);
+/*controls.c*/
 int	controls(int keycode, t_gbl *gbl);
 
 
