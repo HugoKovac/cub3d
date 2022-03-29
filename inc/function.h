@@ -6,7 +6,7 @@
 /*   By: maroly <maroly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 18:48:21 by hkovac            #+#    #+#             */
-/*   Updated: 2022/03/29 18:33:01 by maroly           ###   ########.fr       */
+/*   Updated: 2022/03/29 20:59:04 by maroly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int		parse_map(t_gbl *gbl, char *file);
 int		err_exit(t_gbl *gbl);
 /*utils_str.c*/
 int		ft_strncmp(const char *s1, const char *s2, int n);
-char     ft_atoi(const char *nptr, t_gbl *gbl);
+char    ft_atoi(const char *nptr, t_gbl *gbl);
 /*check_cub.c*/
 void	all_param(t_gbl *gbl);
 int		check_char(char c);
@@ -44,6 +44,7 @@ int		is_j_in(char *str, int j);
 /*ray_casting.c*/
 void start(t_rc *rc, t_gbl *gbl);
 int     ray_casting(t_gbl *gbl);
+unsigned int	rgb_file(char *str, t_gbl *gbl);
 /*draw.c*/
 void    init_mlx(t_mlx *mlx, int x, int y);
 void	draw_line(t_pos beg, t_pos end, t_mlx *mlx, unsigned int color);
@@ -66,6 +67,5 @@ void	reframe(t_gbl *gbl);
 /*controls.c*/
 int	controls(int keycode, t_gbl *gbl);
 /*split*/
-char	**ft_split(char *str, char *charset);
-
+char	**ft_split(char const *s, char c, t_gbl *gbl);
 #endif

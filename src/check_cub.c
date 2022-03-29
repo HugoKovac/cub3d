@@ -6,13 +6,13 @@
 /*   By: maroly <maroly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 17:58:23 by hkovac            #+#    #+#             */
-/*   Updated: 2022/03/28 17:36:51 by maroly           ###   ########.fr       */
+/*   Updated: 2022/03/29 20:58:16 by maroly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "include.h"
 
-void	all_param2(t_gbl *gbl, int i)
+void	all_param2(t_gbl *gbl, int i) // trop de possibilite de leaks
 {
 	if (gbl->file[i][0] == '\0')
 		return ;
@@ -51,6 +51,8 @@ void	all_param(t_gbl *gbl)
 		write (1, "Error\nNot enough texture id\n", ft_strlen("Error\nNot enough texture id\n"));
 		err_exit(gbl);
 	}
+	gbl->sky = rgb_file(gbl->tex_string[C], gbl);
+	gbl->floor = rgb_file(gbl->tex_string[F], gbl);
 }
 
 int	check_char(char c)

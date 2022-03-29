@@ -6,7 +6,7 @@
 /*   By: maroly <maroly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 15:09:37 by maroly            #+#    #+#             */
-/*   Updated: 2022/03/29 18:35:40 by maroly           ###   ########.fr       */
+/*   Updated: 2022/03/29 21:00:02 by maroly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,14 +86,13 @@ unsigned int	rgb_file(char *str, t_gbl *gbl)
 	char	*tmp;
 	unsigned int	color;
 
-	tab = ft_split(str, ",");
+	tab = ft_split(str, ',', gbl);
 	tmp = malloc(sizeof(unsigned int));
 	if (!tmp)
 		err_exit(gbl);
-	printf("%s\n", tab[0]);
-	tmp[0] = /*ft_atoi(tab[0], gbl)*/0;
-	tmp[1] = /*ft_atoi(tab[1], gbl)*/0;
-	tmp[2] = /*ft_atoi(tab[2], gbl)*/255;
+	tmp[0] = ft_atoi(tab[0], gbl);
+	tmp[1] = ft_atoi(tab[1], gbl);
+	tmp[2] = ft_atoi(tab[2], gbl);
 	color = *(unsigned int*)tmp;
 	free(tmp);
 	destroy_tab(tab);
@@ -108,16 +107,16 @@ void	floor_sky(t_gbl *gbl)
 
 	y = -1;
 	head = 0.500000000000;
-	
+	printf("%d %d\n", gbl->sky, gbl->floor);
 	while (++y < HEIGHT)
 	{
 		x = -1;
 		if (y < HEIGHT * head)
 			while (++x < WIDTH)
-				put_pixel_image(gbl->mlx, x, y, /*rgb_file(gbl->c, gbl)*/0x15A815|0xA1f4f);
+				put_pixel_image(gbl->mlx, x, y, gbl->sky);
 		else
 			while (++x < WIDTH)
-				put_pixel_image(gbl->mlx, x, y, /*rgb_file(gbl->c, gbl)*/0x15A815);
+				put_pixel_image(gbl->mlx, x, y, gbl->floor);
 	}
 }
 
