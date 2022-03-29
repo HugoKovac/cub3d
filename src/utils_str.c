@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_str.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hkovac <hkovac@student.42.fr>              +#+  +:+       +#+        */
+/*   By: maroly <maroly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 15:58:58 by hkovac            #+#    #+#             */
-/*   Updated: 2022/03/16 15:59:39 by hkovac           ###   ########.fr       */
+/*   Updated: 2022/03/29 18:21:35 by maroly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,4 +24,31 @@ int	ft_strncmp(const char *s1, const char *s2, int n)
 		i++;
 	}
 	return (0);
+}
+
+char     ft_atoi(const char *nptr, t_gbl *gbl)
+{
+        size_t	i;
+        char	sign;
+        char			result;
+
+        i = 0;
+        sign = 1;
+        result = 0;
+        while (nptr[i] == ' ' || (nptr[i] >= 9 && nptr[i] <= 13))
+                i++;
+        if (nptr[i] == '+' || nptr[i] == '-')
+        {
+                if (nptr[i] == '-')
+                        sign *= -1;
+                i++;
+        }
+        while (nptr[i] >= '0' && nptr[i] <= '9')
+        {
+                result = result * 10 + nptr[i] - 48;
+                i++;
+        }
+		if (result * sign > 255 || result * sign < 0)
+			err_exit(gbl);
+        return (result * sign);
 }

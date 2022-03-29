@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   function.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hkovac <hkovac@student.42.fr>              +#+  +:+       +#+        */
+/*   By: maroly <maroly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 18:48:21 by hkovac            #+#    #+#             */
-/*   Updated: 2022/03/29 10:13:02 by hkovac           ###   ########.fr       */
+/*   Updated: 2022/03/29 18:33:01 by maroly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ int		parse_map(t_gbl *gbl, char *file);
 int		err_exit(t_gbl *gbl);
 /*utils_str.c*/
 int		ft_strncmp(const char *s1, const char *s2, int n);
+char     ft_atoi(const char *nptr, t_gbl *gbl);
 /*check_cub.c*/
 void	all_param(t_gbl *gbl);
 int		check_char(char c);
@@ -49,7 +50,7 @@ void	draw_line(t_pos beg, t_pos end, t_mlx *mlx, unsigned int color);
 void    put_pixel_image(t_mlx *mlx, int x, int y, unsigned int color);
 /*open_texture.c*/
 void    open_texture(t_gbl *gbl);
-/*hook*/
+/*controls.c*/
 int	controls(int keycode, t_gbl *gbl);
 /*texturing.c*/
 int		what_dir(t_gbl *gbl);
@@ -64,6 +65,7 @@ int	destroy_window(t_gbl *gbl);
 void	reframe(t_gbl *gbl);
 /*controls.c*/
 int	controls(int keycode, t_gbl *gbl);
-
+/*split*/
+char	**ft_split(char *str, char *charset);
 
 #endif

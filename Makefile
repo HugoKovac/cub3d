@@ -13,6 +13,7 @@ SRC =	main.c \
 		init_player.c \
 		utils_mlx.c \
 		controls.c \
+		ft_split.c	\
 
 NAME =	cub3d
 

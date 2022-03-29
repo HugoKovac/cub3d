@@ -6,7 +6,7 @@
 /*   By: maroly <maroly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 15:09:37 by maroly            #+#    #+#             */
-/*   Updated: 2022/03/29 14:00:10 by maroly           ###   ########.fr       */
+/*   Updated: 2022/03/29 18:35:40 by maroly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,8 @@ static void init_calcul(t_rc *rc, int x)
 	rc->cameraX = 2 * x / (double)WALL_WIDTH - 1;
 	rc->rayDirX = rc->dirX + rc->planeX * rc->cameraX;
 	rc->rayDirY = rc->dirY + rc->planeY * rc->cameraX;
-	rc->mapX = (int)rc->posX;//arrondir?
-	rc->mapY = (int)rc->posY;//arrondir?
+	rc->mapX = (int)rc->posX;
+	rc->mapY = (int)rc->posY;
 	if (rc->rayDirX == 0)
 		rc->deltaX = 1e30;
 	else
@@ -80,6 +80,26 @@ static void init_calcul(t_rc *rc, int x)
 	find_side(rc);
 }
 
+unsigned int	rgb_file(char *str, t_gbl *gbl)
+{
+	char			**tab;
+	char	*tmp;
+	unsigned int	color;
+
+	tab = ft_split(str, ",");
+	tmp = malloc(sizeof(unsigned int));
+	if (!tmp)
+		err_exit(gbl);
+	printf("%s\n", tab[0]);
+	tmp[0] = /*ft_atoi(tab[0], gbl)*/0;
+	tmp[1] = /*ft_atoi(tab[1], gbl)*/0;
+	tmp[2] = /*ft_atoi(tab[2], gbl)*/255;
+	color = *(unsigned int*)tmp;
+	free(tmp);
+	destroy_tab(tab);
+	return (color);
+}
+
 void	floor_sky(t_gbl *gbl)
 {
 	int x;
@@ -88,15 +108,16 @@ void	floor_sky(t_gbl *gbl)
 
 	y = -1;
 	head = 0.500000000000;
+	
 	while (++y < HEIGHT)
 	{
 		x = -1;
 		if (y < HEIGHT * head)
 			while (++x < WIDTH)
-				put_pixel_image(gbl->mlx, x, y, 0xFF0515A1>>1);
+				put_pixel_image(gbl->mlx, x, y, /*rgb_file(gbl->c, gbl)*/0x15A815|0xA1f4f);
 		else
 			while (++x < WIDTH)
-				put_pixel_image(gbl->mlx, x, y, 0xFF0515A1);
+				put_pixel_image(gbl->mlx, x, y, /*rgb_file(gbl->c, gbl)*/0x15A815);
 	}
 }
 
@@ -118,7 +139,6 @@ void start(t_rc *rc, t_gbl *gbl)
 int ray_casting(t_gbl *gbl)
 {
 	t_rc rc;
-	//int e, f;
 
 	gbl->rc = &rc;
 	if (!find_pos(gbl, &rc))
@@ -127,10 +147,6 @@ int ray_casting(t_gbl *gbl)
 	gbl->rc->speed = 0.15;
 	gbl->rc->is_running = false;
 	start(&rc, gbl);
-	//	printf("%p\n", gbl->mlx->img);
-
-	//printf("%d %d\n", e, f);
-	//printf("%s\n", gbl->mlx->addr);
 	mlx_put_image_to_window(gbl->mlx->mlx, gbl->mlx->mlx_win, gbl->mlx->img, 0, 0);
 	mlx_hook(gbl->mlx->mlx_win, 2, 1L >> 0, controls, gbl);
 	//mlx_hook(gbl->mlx->mlx_win, 6, 1L >> 0, mouse, gbl);

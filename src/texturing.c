@@ -6,9 +6,12 @@
 /*   By: maroly <maroly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 09:58:38 by hkovac            #+#    #+#             */
-/*   Updated: 2022/03/29 14:24:12 by maroly           ###   ########.fr       */
+/*   Updated: 2022/03/29 17:35:14 by maroly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+typedef int int32;
+typedef unsigned int Uint32;
 
 #include "include.h"
 
@@ -27,52 +30,37 @@ int what_dir(t_gbl *gbl)
 
 void	stripe_tex(t_gbl *gbl, int x)
 {
-	double wallX; //where exactly the wall was hit
+	double	wallX;
+	char	*tmp;
+	unsigned int	color;
 
 	if(gbl->rc->side == 0)
 		wallX = gbl->rc->posY + gbl->rc->perpWall * gbl->rc->rayDirY;
 	else
 		wallX = gbl->rc->posX + gbl->rc->perpWall * gbl->rc->rayDirX;
-	// wallX -= floor((wallX));
+	wallX -= floor(wallX);
 	int what_tex = what_dir(gbl);
-	//x coordinate on the texture
-	int texX = (int)wallX * gbl->tex_tab[what_tex]->texWidth;
-	//printf("%lf %d\n", wallX, gbl->tex_tab[what_tex]->texWidth);
-	//if (gbl->rc->side == 0 && gbl->rc->rayDirX > 0)
-	//{
-		//printf("%d %d\n", gbl->tex_tab[what_tex]->texWidth, texX);
-	//	texX = gbl->tex_tab[what_tex]->texWidth - texX - 1;
-	//}
-	//if (gbl->rc->side == 1 && gbl->rc->rayDirY < 0)
-	//	texX = gbl->tex_tab[what_tex]->texWidth - texX - 1;
-
-	// TODO: an integer-only bersenham or DDA like algorithm could make the texture coordinate stepping faster
-	// How much to increase the texture coordinate per screen pixel
+	int texX = (int)(wallX * (double)gbl->tex_tab[what_tex]->texWidth);
+	if(gbl->rc->side == 0 && gbl->rc->rayDirX > 0)
+		texX = gbl->tex_tab[what_tex]->texWidth - texX - 1;
+    if(gbl->rc->side == 1 && gbl->rc->rayDirY < 0)
+		texX = gbl->tex_tab[what_tex]->texWidth - texX - 1;    
 	double step = 1.0 * gbl->tex_tab[what_tex]->texHeight / gbl->rc->lineheight;
-	// Starting texture coordinate
 	double texPos = (gbl->rc->drawstart /*- pitch*/ - HEIGHT / 2 + gbl->rc->lineheight / 2) * step;
 	for(int y = gbl->rc->drawstart; y < gbl->rc->drawend; y++)
 	{
-	// Cast the texture coordinate to integer, and mask with (texHeight - 1) in case of overflow
 		int texY = (int)texPos & (gbl->tex_tab[what_tex]->texHeight - 1);
 		texPos += step;
-		// printf("%d\n", what_tex);
-		// printf("%#x\n", *gbl->tex_tab[what_tex]->addr + (texY * gbl->tex_tab[what_tex]->line_length + texX * (gbl->tex_tab[what_tex]->bpp / 8)));
-		unsigned int color = *gbl->tex_tab[what_tex]->addr + (texY * gbl->tex_tab[what_tex]->line_length + texX * (gbl->tex_tab[what_tex]->bpp / 8));
-	//make color darker for y-sides: R, G and B byte each divided through two with a "shift" and an "and"
+		tmp = gbl->tex_tab[what_tex]->addr + (texY * gbl->tex_tab[what_tex]->line_length + texX * (gbl->tex_tab[what_tex]->bpp / 8));
+		color = *(unsigned int*)tmp;
 		if(gbl->rc->side == 1) 
 			color = (color >> 1) & 8355711;
 		put_pixel_image(gbl->mlx, x, y, color);
-		// gbl->mlx->addr[y * WIDTH + x] = color;
 	}
 }
 
 void	trace_stripe(t_gbl *gbl, int x)
 {
-	//t_pos	beg;
-	//t_pos	end;
-	//int		color = 0x5F3384;
-
 	if (gbl->rc->perpWall != 0)
 		gbl->rc->lineheight = (int)(WALL_HEIGHT / gbl->rc->perpWall);
 	else
@@ -84,7 +72,4 @@ void	trace_stripe(t_gbl *gbl, int x)
 	if (gbl->rc->drawend >= WALL_HEIGHT)
 		gbl->rc->drawend = WALL_HEIGHT - 1;
 	stripe_tex(gbl, x);
-	// if (rc->side == 1)
-	// 	color = (color >> 1) & 8355711;
-	// draw_line(beg, end, mlx, color);
 }

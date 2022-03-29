@@ -6,7 +6,7 @@
 /*   By: maroly <maroly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 10:05:14 by hkovac            #+#    #+#             */
-/*   Updated: 2022/03/29 13:10:19 by maroly           ###   ########.fr       */
+/*   Updated: 2022/03/29 16:19:13 by maroly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,18 +30,18 @@ void	down(t_gbl *gbl)
 
 void left(t_gbl *gbl)
 {
-	if (gbl->map[(int)(gbl->rc->posY + (gbl->rc->dirX * sin(-PI / 2) + gbl->rc->dirY * cos(-PI / 2)) * (gbl->rc->speed / 2))][(int)gbl->rc->posX] != '1')
-		gbl->rc->posY += ((gbl->rc->dirX * sin(-PI / 2) + gbl->rc->dirY * cos(-PI / 2)) * (gbl->rc->speed / 2));
-	if (gbl->map[(int)gbl->rc->posY][(int)(gbl->rc->posX + (gbl->rc->dirX * cos(-PI / 2) - gbl->rc->dirY * sin(-PI / 2)) * (gbl->rc->speed / 2))] != '1')
-		gbl->rc->posX += ((gbl->rc->dirX * cos(-PI / 2) - gbl->rc->dirY * sin(-PI / 2)) * (gbl->rc->speed / 2));
+	if (gbl->map[(int)(gbl->rc->posY + (gbl->rc->dirX * sin(-PI / 2)) * (gbl->rc->speed / 2))][(int)gbl->rc->posX] != '1')
+		gbl->rc->posY += ((gbl->rc->dirX * sin(-PI / 2)) * (gbl->rc->speed / 2));
+	if (gbl->map[(int)gbl->rc->posY][(int)(gbl->rc->posX + (- gbl->rc->dirY * sin(-PI / 2)) * (gbl->rc->speed / 2))] != '1')
+		gbl->rc->posX += ((- gbl->rc->dirY * sin(-PI / 2)) * (gbl->rc->speed / 2));
 }
 
 void	right(t_gbl *gbl)
 {
-	if (gbl->map[(int)(gbl->rc->posY + (gbl->rc->dirX * sin(PI / 2) + gbl->rc->dirY * cos(PI / 2)) * (gbl->rc->speed / 2))][(int)gbl->rc->posX] != '1')
-		gbl->rc->posY += ((gbl->rc->dirX * sin(PI / 2) + gbl->rc->dirY * cos(PI / 2)) * (gbl->rc->speed / 2));
-	if (gbl->map[(int)gbl->rc->posY][(int)(gbl->rc->posX + (gbl->rc->dirX * cos(PI / 2) - gbl->rc->dirY * sin(PI / 2)) * (gbl->rc->speed / 2))] != '1')
-		gbl->rc->posX += ((gbl->rc->dirX * cos(PI / 2) - gbl->rc->dirY * sin(PI / 2)) * (gbl->rc->speed / 2));
+	if (gbl->map[(int)(gbl->rc->posY + (gbl->rc->dirX * sin(PI / 2)) * (gbl->rc->speed / 2))][(int)gbl->rc->posX] != '1')
+		gbl->rc->posY += ((gbl->rc->dirX * sin(PI / 2)) * (gbl->rc->speed / 2));
+	if (gbl->map[(int)gbl->rc->posY][(int)(gbl->rc->posX + (- gbl->rc->dirY * sin(PI / 2)) * (gbl->rc->speed / 2))] != '1')
+		gbl->rc->posX += ((- gbl->rc->dirY * sin(PI / 2)) * (gbl->rc->speed / 2));
 }
 
 void	arrow_left(t_gbl *gbl)
