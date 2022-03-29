@@ -6,15 +6,12 @@
 /*   By: hkovac <hkovac@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 15:09:37 by maroly            #+#    #+#             */
-/*   Updated: 2022/03/29 10:06:45 by hkovac           ###   ########.fr       */
+/*   Updated: 2022/03/29 10:09:34 by hkovac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "include.h"
 
-/*texture*/
-
-/*raycasting*/
 static void trace_ray(t_rc *rc, t_gbl *gbl)
 {
 	while (rc->hit == 0)
@@ -117,17 +114,6 @@ void start(t_rc *rc, t_gbl *gbl)
 		x++;
 	}
 }
-/*init_player*/
-
-/*mlx*/
-
-/*controls*/
-
-/*int	mouse(int x, int y, t_gbl *gbl)
-{
-	(void)y;
-
-}*/
 
 int ray_casting(t_gbl *gbl)
 {

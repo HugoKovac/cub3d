@@ -6,7 +6,7 @@
 /*   By: hkovac <hkovac@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 18:48:21 by hkovac            #+#    #+#             */
-/*   Updated: 2022/03/29 10:07:00 by hkovac           ###   ########.fr       */
+/*   Updated: 2022/03/29 10:13:02 by hkovac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ void init_dir(t_gbl *gbl, t_rc *rc);
 /*utils_mlx.c*/
 void    re_win(t_gbl *gbl);
 int	destroy_window(t_gbl *gbl);
+void	reframe(t_gbl *gbl);
 /*controls.c*/
 int	controls(int keycode, t_gbl *gbl);
 
