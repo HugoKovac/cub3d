@@ -30,9 +30,9 @@ MLX = libmlx.a
 FLAGS2 = -lmlx -lm -lbsd -lX11 -lXext
 endif
 
-MLX_DIR = mlx_OG
-MLX = libmlx.a 
-FLAGS2 = -lmlx -framework OpenGL -framework Appkit
+# MLX_DIR = mlx_OG
+# MLX = libmlx.a 
+# FLAGS2 = -lmlx -framework OpenGL -framework Appkit
 
 # diff entre .a et .dylib
 # .a = lib static, les fonctions utilisees sont directement ecrite dans le binaire

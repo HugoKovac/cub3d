@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray_casting.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hkovac <hkovac@student.42.fr>              +#+  +:+       +#+        */
+/*   By: maroly <maroly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 15:09:37 by maroly            #+#    #+#             */
-/*   Updated: 2022/03/29 10:09:34 by hkovac           ###   ########.fr       */
+/*   Updated: 2022/03/29 14:00:10 by maroly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ void start(t_rc *rc, t_gbl *gbl)
 
 	x = 0;
 	floor_sky(gbl);
-	while (x < WALL_WIDTH)
+	while (x < WIDTH)
 	{
 		init_calcul(rc, x);//calcul side / Δ / cameraX / raydir
 		trace_ray(rc, gbl);//trace les rayons jusqu'aux murs
@@ -130,6 +130,7 @@ int ray_casting(t_gbl *gbl)
 	//	printf("%p\n", gbl->mlx->img);
 
 	//printf("%d %d\n", e, f);
+	//printf("%s\n", gbl->mlx->addr);
 	mlx_put_image_to_window(gbl->mlx->mlx, gbl->mlx->mlx_win, gbl->mlx->img, 0, 0);
 	mlx_hook(gbl->mlx->mlx_win, 2, 1L >> 0, controls, gbl);
 	//mlx_hook(gbl->mlx->mlx_win, 6, 1L >> 0, mouse, gbl);
