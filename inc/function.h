@@ -6,7 +6,7 @@
 /*   By: maroly <maroly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 18:48:21 by hkovac            #+#    #+#             */
-/*   Updated: 2022/03/29 20:59:04 by maroly           ###   ########.fr       */
+/*   Updated: 2022/03/30 02:46:17 by maroly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int		parse_map(t_gbl *gbl, char *file);
 int		err_exit(t_gbl *gbl);
 /*utils_str.c*/
 int		ft_strncmp(const char *s1, const char *s2, int n);
-char    ft_atoi(const char *nptr, t_gbl *gbl);
+int ft_atoi(const char *nptr, t_gbl *gbl);
 /*check_cub.c*/
 void	all_param(t_gbl *gbl);
 int		check_char(char c);
@@ -66,6 +66,11 @@ int	destroy_window(t_gbl *gbl);
 void	reframe(t_gbl *gbl);
 /*controls.c*/
 int	controls(int keycode, t_gbl *gbl);
-/*split*/
+/*split.c*/
 char	**ft_split(char const *s, char c, t_gbl *gbl);
+/*ft_convert_base.c*/
+int	len(int nb, int size_of_base);
+int	is_in_base(char c, char *base);
+int	find_index(char c, char *base);
+char	*ft_convert_base(char *nbr, char *base_from, char *base_to);
 #endif

@@ -6,7 +6,7 @@
 /*   By: maroly <maroly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 15:09:37 by maroly            #+#    #+#             */
-/*   Updated: 2022/03/29 21:00:02 by maroly           ###   ########.fr       */
+/*   Updated: 2022/03/30 02:46:59 by maroly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,7 @@ void	floor_sky(t_gbl *gbl)
 
 	y = -1;
 	head = 0.500000000000;
-	printf("%d %d\n", gbl->sky, gbl->floor);
+	//printf("%d %d\n", gbl->sky, gbl->floor);
 	while (++y < HEIGHT)
 	{
 		x = -1;

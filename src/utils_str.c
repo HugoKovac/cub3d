@@ -6,7 +6,7 @@
 /*   By: maroly <maroly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 15:58:58 by hkovac            #+#    #+#             */
-/*   Updated: 2022/03/29 20:55:36 by maroly           ###   ########.fr       */
+/*   Updated: 2022/03/30 02:45:56 by maroly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,10 @@ int	ft_strncmp(const char *s1, const char *s2, int n)
 	return (0);
 }
 
-char     ft_atoi(const char *nptr, t_gbl *gbl)
+int ft_atoi(const char *nptr, t_gbl *gbl)
 {
         size_t	i;
-        char	sign;
+        int	sign;
         int     result;
 
         i = 0;
@@ -48,7 +48,7 @@ char     ft_atoi(const char *nptr, t_gbl *gbl)
                 result = result * 10 + nptr[i] - 48;
                 i++;
         }
-	if (result * sign > 255 || result * sign < 0)
+	if (result * sign < 0)
 		err_exit(gbl);
         return (result * sign);
 }
