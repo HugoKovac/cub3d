@@ -6,7 +6,7 @@
 /*   By: maroly <maroly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 18:36:24 by hkovac            #+#    #+#             */
-/*   Updated: 2022/03/30 14:19:45 by maroly           ###   ########.fr       */
+/*   Updated: 2022/03/30 15:40:23 by maroly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@
 # define F 4
 # define C 5
 
-# define WIDTH 860
-# define HEIGHT 640
+# define WIDTH 400
+# define HEIGHT 400
 
 # define PI 3.1415926
 
@@ -46,7 +46,8 @@
 # define ARROW_RIGHT 65363
 # define ESC 65307
 # define SHIFT 65505
-
+# define ARROW_UP 65362
+# define ARROW_DOWN 65364
 # include <stdlib.h>
 # include <sys/types.h>
 # include <sys/uio.h>

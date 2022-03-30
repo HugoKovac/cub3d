@@ -16,6 +16,7 @@ SRC =	main.c \
 		ft_split.c	\
 		ft_convert_base.c\
 		ft_convert_base2.c\
+		mouse.c\
 
 NAME =	cub3d
 

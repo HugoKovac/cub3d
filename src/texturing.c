@@ -6,7 +6,7 @@
 /*   By: maroly <maroly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 09:58:38 by hkovac            #+#    #+#             */
-/*   Updated: 2022/03/29 17:35:14 by maroly           ###   ########.fr       */
+/*   Updated: 2022/03/30 15:27:43 by maroly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	stripe_tex(t_gbl *gbl, int x)
     if(gbl->rc->side == 1 && gbl->rc->rayDirY < 0)
 		texX = gbl->tex_tab[what_tex]->texWidth - texX - 1;    
 	double step = 1.0 * gbl->tex_tab[what_tex]->texHeight / gbl->rc->lineheight;
-	double texPos = (gbl->rc->drawstart /*- pitch*/ - HEIGHT / 2 + gbl->rc->lineheight / 2) * step;
+	double texPos = (gbl->rc->drawstart - gbl->head - HEIGHT / 2 + gbl->rc->lineheight / 2) * step;
 	for(int y = gbl->rc->drawstart; y < gbl->rc->drawend; y++)
 	{
 		int texY = (int)texPos & (gbl->tex_tab[what_tex]->texHeight - 1);
@@ -62,14 +62,14 @@ void	stripe_tex(t_gbl *gbl, int x)
 void	trace_stripe(t_gbl *gbl, int x)
 {
 	if (gbl->rc->perpWall != 0)
-		gbl->rc->lineheight = (int)(WALL_HEIGHT / gbl->rc->perpWall);
+		gbl->rc->lineheight = (int)(HEIGHT / gbl->rc->perpWall);
 	else
-		gbl->rc->lineheight = (int)WALL_HEIGHT;
-	gbl->rc->drawstart = -gbl->rc->lineheight / 2 + WALL_HEIGHT / 2;
+		gbl->rc->lineheight = (int)HEIGHT;
+	gbl->rc->drawstart = -gbl->rc->lineheight / 2 + HEIGHT / 2 + gbl->head;
 	if (gbl->rc->drawstart < 0)
 		gbl->rc->drawstart = 0;
-	gbl->rc->drawend = gbl->rc->lineheight / 2 + WALL_HEIGHT / 2; // + 100 regarde le ciel, -100 le sol
-	if (gbl->rc->drawend >= WALL_HEIGHT)
-		gbl->rc->drawend = WALL_HEIGHT - 1;
+	gbl->rc->drawend = gbl->rc->lineheight / 2 + HEIGHT / 2 + gbl->head;
+	if (gbl->rc->drawend >= HEIGHT)
+		gbl->rc->drawend = HEIGHT - 1;
 	stripe_tex(gbl, x);
 }

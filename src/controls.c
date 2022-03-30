@@ -6,11 +6,23 @@
 /*   By: maroly <maroly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 10:05:14 by hkovac            #+#    #+#             */
-/*   Updated: 2022/03/29 16:19:13 by maroly           ###   ########.fr       */
+/*   Updated: 2022/03/30 14:48:12 by maroly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "include.h"
+
+void	head_up(t_gbl *gbl)
+{
+	gbl->head += 10;
+	gbl->horizon += 0.0156;
+}
+
+void	head_down(t_gbl *gbl)
+{
+	gbl->head -= 10;
+	gbl->horizon -= 0.0156;
+}
 
 void	up(t_gbl *gbl)
 {
@@ -96,6 +108,10 @@ int	controls(int keycode, t_gbl *gbl)
 		arrow_left(gbl);
 	else if (keycode == ARROW_RIGHT)
 		arrow_right(gbl);
+	else if (keycode == ARROW_UP)
+		head_up(gbl);
+	else if (keycode == ARROW_DOWN)
+		head_down(gbl);
 	reframe(gbl);
 	return (1);
 }

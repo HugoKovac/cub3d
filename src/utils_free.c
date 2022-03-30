@@ -6,7 +6,7 @@
 /*   By: maroly <maroly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 15:48:50 by hkovac            #+#    #+#             */
-/*   Updated: 2022/03/30 14:07:58 by maroly           ###   ########.fr       */
+/*   Updated: 2022/03/30 15:43:15 by maroly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ void destroy_mlx(t_mlx *mlx)
 {
     mlx_destroy_image(mlx->mlx, mlx->img);
     mlx_destroy_window(mlx->mlx, mlx->mlx_win);
+    free(mlx->mlx);
     free(mlx);    
 }
 

@@ -6,15 +6,12 @@
 /*   By: maroly <maroly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 18:48:21 by hkovac            #+#    #+#             */
-/*   Updated: 2022/03/30 14:19:55 by maroly           ###   ########.fr       */
+/*   Updated: 2022/03/30 15:35:39 by maroly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FUNCTION_H
 # define FUNCTION_H
-
-# define WALL_WIDTH  860
-# define WALL_HEIGHT 640
 
 /*get_next_line*/
 char	*strmcat(char *s1, char *s2);
@@ -56,6 +53,8 @@ void    put_pixel_image(t_mlx *mlx, int x, int y, unsigned int color);
 void    open_texture(t_gbl *gbl);
 /*controls.c*/
 int	controls(int keycode, t_gbl *gbl);
+void	arrow_right(t_gbl *gbl);
+void	arrow_left(t_gbl *gbl);
 /*texturing.c*/
 int		what_dir(t_gbl *gbl);
 void	stripe_tex(t_gbl *gbl, int x);
@@ -76,4 +75,7 @@ int	len(int nb, int size_of_base);
 int	is_in_base(char c, char *base);
 int	find_index(char c, char *base);
 char	*ft_convert_base(char *nbr, char *base_from, char *base_to);
+/*mouse.c*/
+int mouse(int x, int y, t_gbl *gbl);
+int mouse_pressed(int button, int x, int y, t_gbl *gbl);
 #endif

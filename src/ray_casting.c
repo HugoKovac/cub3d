@@ -6,7 +6,7 @@
 /*   By: maroly <maroly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 15:09:37 by maroly            #+#    #+#             */
-/*   Updated: 2022/03/30 02:46:59 by maroly           ###   ########.fr       */
+/*   Updated: 2022/03/30 15:26:49 by maroly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ static void	find_side(t_rc *rc)
 static void init_calcul(t_rc *rc, int x)
 {
 	rc->hit = 0;
-	rc->cameraX = 2 * x / (double)WALL_WIDTH - 1;
+	rc->cameraX = 2 * x / (double)WIDTH - 1;
 	rc->rayDirX = rc->dirX + rc->planeX * rc->cameraX;
 	rc->rayDirY = rc->dirY + rc->planeY * rc->cameraX;
 	rc->mapX = (int)rc->posX;
@@ -103,14 +103,12 @@ void	floor_sky(t_gbl *gbl)
 {
 	int x;
 	int y;
-	double head;
 
 	y = -1;
-	head = 0.500000000000;
 	while (++y < HEIGHT)
 	{
 		x = -1;
-		if (y < HEIGHT * head)
+		if (y < HEIGHT * gbl->horizon)
 			while (++x < WIDTH)
 				put_pixel_image(gbl->mlx, x, y, gbl->sky);
 		else
@@ -147,7 +145,8 @@ int ray_casting(t_gbl *gbl)
 	start(&rc, gbl);
 	mlx_put_image_to_window(gbl->mlx->mlx, gbl->mlx->mlx_win, gbl->mlx->img, 0, 0);
 	mlx_hook(gbl->mlx->mlx_win, 2, 1L >> 0, controls, gbl);
-	//mlx_hook(gbl->mlx->mlx_win, 6, 1L >> 0, mouse, gbl);
+	mlx_mouse_hook(gbl->mlx->mlx_win, mouse_pressed, gbl);
+	mlx_hook(gbl->mlx->mlx_win, 6, 1 << 6, mouse, gbl);
 	mlx_hook(gbl->mlx->mlx_win, 17, 0, destroy_window, gbl);
 	mlx_loop(gbl->mlx->mlx);
 	return (1);

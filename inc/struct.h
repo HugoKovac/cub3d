@@ -6,7 +6,7 @@
 /*   By: maroly <maroly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 18:35:33 by hkovac            #+#    #+#             */
-/*   Updated: 2022/03/30 13:38:25 by maroly           ###   ########.fr       */
+/*   Updated: 2022/03/30 15:31:08 by maroly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,10 +84,13 @@ typedef struct s_gbl
 	char	*tex_string[6];
 	unsigned int sky;
 	unsigned int floor;
+	double	head;
+	double	horizon;
+	bool	is_mouse_hide;
+	int count;
 	t_mlx	*mlx;
 	t_rc	*rc;
 	t_mlx	**tex_tab;
-
 }	t_gbl;
 
 typedef struct s_pos
