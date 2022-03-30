@@ -6,7 +6,7 @@
 /*   By: maroly <maroly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 18:35:33 by hkovac            #+#    #+#             */
-/*   Updated: 2022/03/30 10:34:37 by maroly           ###   ########.fr       */
+/*   Updated: 2022/03/30 13:38:25 by maroly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,12 +82,6 @@ typedef struct s_gbl
 	char	**map;
 	char	**file;
 	char	*tex_string[6];
-	char	*no;
-	char	*so;
-	char	*we;
-	char	*ea;
-	char	*f;
-	char	*c;
 	unsigned int sky;
 	unsigned int floor;
 	t_mlx	*mlx;

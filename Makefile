@@ -14,6 +14,8 @@ SRC =	main.c \
 		utils_mlx.c \
 		controls.c \
 		ft_split.c	\
+		ft_convert_base.c\
+		ft_convert_base2.c\
 
 NAME =	cub3d
 

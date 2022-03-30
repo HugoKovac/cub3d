@@ -6,7 +6,7 @@
 /*   By: maroly <maroly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 18:48:21 by hkovac            #+#    #+#             */
-/*   Updated: 2022/03/30 02:46:17 by maroly           ###   ########.fr       */
+/*   Updated: 2022/03/30 14:19:55 by maroly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,9 @@ char	*get_next_line(int fd);
 /*utils_free.c*/
 void	destroy_tab(char **tab);
 int		end_free(t_gbl *gbl);
+void    destroy_tex_mlx(t_mlx **tex_tab);
+void    destroy_mlx(t_mlx *mlx);
+void    destroy_tex(char *tab[6]);
 /*parse_map.c*/
 int		parse_map(t_gbl *gbl, char *file);
 /*exit.c*/

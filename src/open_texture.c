@@ -6,7 +6,7 @@
 /*   By: maroly <maroly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 10:02:13 by hkovac            #+#    #+#             */
-/*   Updated: 2022/03/29 13:02:38 by maroly           ###   ########.fr       */
+/*   Updated: 2022/03/30 14:01:30 by maroly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,5 +32,5 @@ void    open_texture(t_gbl *gbl)
         }
 	    tex[i]->addr = mlx_get_data_addr(tex[i]->img, &tex[i]->bpp, &tex[i]->line_length, &tex[i]->endian);
     }
-    gbl->tex_tab = tex;//to free
+    gbl->tex_tab = tex;
 }

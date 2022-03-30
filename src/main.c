@@ -6,7 +6,7 @@
 /*   By: maroly <maroly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 18:22:18 by hkovac            #+#    #+#             */
-/*   Updated: 2022/03/25 13:27:17 by maroly           ###   ########.fr       */
+/*   Updated: 2022/03/30 13:45:06 by maroly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,5 @@ int main(int ac, char **av)
 		end_free(gbl);
 		return (1);
 	}
-	//mlx_loop_hook(gbl->mlx->mlx, ray_casting, gbl);
-	//mlx_loop(gbl->mlx->mlx);
 	return (end_free(gbl));
 }

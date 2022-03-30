@@ -6,7 +6,7 @@
 /*   By: maroly <maroly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 17:58:23 by hkovac            #+#    #+#             */
-/*   Updated: 2022/03/30 10:35:32 by maroly           ###   ########.fr       */
+/*   Updated: 2022/03/30 13:57:22 by maroly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ unsigned int rgb_hexa(char *str, t_gbl *gbl)
 	free(color.B);
 	free(color.rg_hexa);
 	color.rgb_dec = ft_convert_base(color.rgb_hexa, "0123456789abcdef", "0123456789");
+	free(color.rgb_hexa);
 	color.color = ft_atoi(color.rgb_dec,  gbl);
 	free(color.rgb_dec);
 	return (color.color);

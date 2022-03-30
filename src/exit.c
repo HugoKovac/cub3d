@@ -6,7 +6,7 @@
 /*   By: maroly <maroly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 15:44:08 by hkovac            #+#    #+#             */
-/*   Updated: 2022/03/28 18:04:13 by maroly           ###   ########.fr       */
+/*   Updated: 2022/03/30 13:48:41 by maroly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,19 +16,12 @@ int	err_exit(t_gbl *gbl)
 {
 	if (gbl->file)
 		destroy_tab(gbl->file);
-	if (gbl->no)
-		free(gbl->no);
-	if (gbl->so)
-		free(gbl->so);
-	if (gbl->we)
-		free(gbl->we);
-	if (gbl->ea)
-		free(gbl->ea);
-	if (gbl->f)
-		free(gbl->f);
-	if (gbl->c)
-		free(gbl->c);
-	//free_mlx();//a faire
+	if (gbl->tex_string)
+		destroy_tex(gbl->tex_string);
+	if (gbl->tex_tab)
+		destroy_tex_mlx(gbl->tex_tab);
+	if (gbl->mlx)
+		destroy_mlx(gbl->mlx);
 	free(gbl);
 	exit (1);
 }
