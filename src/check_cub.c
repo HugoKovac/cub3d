@@ -6,13 +6,13 @@
 /*   By: maroly <maroly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 17:58:23 by hkovac            #+#    #+#             */
-/*   Updated: 2022/03/30 03:03:23 by maroly           ###   ########.fr       */
+/*   Updated: 2022/03/30 10:35:32 by maroly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "include.h"
 
-void	all_param2(t_gbl *gbl, int i) // trop de possibilite de leaks
+void	all_param2(t_gbl *gbl, int i)
 {
 	if (gbl->file[i][0] == '\0')
 		return ;
@@ -35,7 +35,7 @@ void	all_param2(t_gbl *gbl, int i) // trop de possibilite de leaks
 	}
 }
 
-char *str_triple_cat(char *s1, char *s2, char *s3)
+char *ft_strcat(char *s1, char *s2)
 {
 	int i;
 	int j;
@@ -43,24 +43,17 @@ char *str_triple_cat(char *s1, char *s2, char *s3)
 
 	i = 0;
 	j = 0;
-	new = malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + ft_strlen(s3) + 1));
+	new = malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1));
 	while (s1[i])
 	{
 		new[j] = s1[i];
-		i++;
 		j++;
+		i++;
 	}
 	i = 0;
 	while (s2[i])
 	{
 		new[j] = s2[i];
-		i++;
-		j++;
-	}
-	i = 0;
-	while (s3[i])
-	{
-		new[j] = s3[i];
 		i++;
 		j++;
 	}
@@ -70,27 +63,23 @@ char *str_triple_cat(char *s1, char *s2, char *s3)
 
 unsigned int rgb_hexa(char *str, t_gbl *gbl)
 {
-	char **rgb;
-	char *R;
-	char *G;
-	char *B;
-	char *rgb_hexa;
-	char *rgb_dec;
-	unsigned int color;
+	t_color color;
 
-	rgb = ft_split(str, ',', gbl);
-	R = ft_convert_base(rgb[0], "0123456789", "0123456789abcdef");
-	G = ft_convert_base(rgb[1], "0123456789", "0123456789abcdef");
-	B = ft_convert_base(rgb[2], "0123456789", "0123456789abcdef");
-	destroy_tab(rgb);
-	rgb_hexa = str_triple_cat(R, G, B);
-	free(R);
-	free(G);
-	free(B);
-	rgb_dec = ft_convert_base(rgb_hexa, "0123456789abcdef", "0123456789");
-	color = ft_atoi(rgb_dec,  gbl);
-	free(rgb_dec);
-	return (color);
+	color.rgb = ft_split(str, ',', gbl);
+	color.R = ft_convert_base(color.rgb[0], "0123456789", "0123456789abcdef");
+	color.G = ft_convert_base(color.rgb[1], "0123456789", "0123456789abcdef");
+	color.B = ft_convert_base(color.rgb[2], "0123456789", "0123456789abcdef");
+	destroy_tab(color.rgb);
+	color.rg_hexa = ft_strcat(color.R, color.G);
+	free(color.R);
+	free(color.G);
+	color.rgb_hexa = ft_strcat(color.rg_hexa, color.B);
+	free(color.B);
+	free(color.rg_hexa);
+	color.rgb_dec = ft_convert_base(color.rgb_hexa, "0123456789abcdef", "0123456789");
+	color.color = ft_atoi(color.rgb_dec,  gbl);
+	free(color.rgb_dec);
+	return (color.color);
 }
 
 void	all_param(t_gbl *gbl)

@@ -6,12 +6,24 @@
 /*   By: maroly <maroly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 18:35:33 by hkovac            #+#    #+#             */
-/*   Updated: 2022/03/29 20:58:37 by maroly           ###   ########.fr       */
+/*   Updated: 2022/03/30 10:34:37 by maroly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCT_H
 # define STRUCT_H
+
+typedef struct s_color
+{
+	char **rgb;
+	char *R;
+	char *G;
+	char *B;
+	char *rg_hexa;
+	char *rgb_hexa;
+	char *rgb_dec;
+	unsigned int color;
+}	t_color;
 
 typedef struct s_mlx
 {

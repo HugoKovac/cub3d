@@ -107,7 +107,6 @@ void	floor_sky(t_gbl *gbl)
 
 	y = -1;
 	head = 0.500000000000;
-	//printf("%d %d\n", gbl->sky, gbl->floor);
 	while (++y < HEIGHT)
 	{
 		x = -1;
