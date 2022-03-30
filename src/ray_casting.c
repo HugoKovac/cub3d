@@ -6,7 +6,7 @@
 /*   By: maroly <maroly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 15:09:37 by maroly            #+#    #+#             */
-/*   Updated: 2022/03/30 15:26:49 by maroly           ###   ########.fr       */
+/*   Updated: 2022/03/30 19:22:48 by maroly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,10 +143,11 @@ int ray_casting(t_gbl *gbl)
 	gbl->rc->speed = 0.15;
 	gbl->rc->is_running = false;
 	start(&rc, gbl);
+	print_map(gbl);
 	mlx_put_image_to_window(gbl->mlx->mlx, gbl->mlx->mlx_win, gbl->mlx->img, 0, 0);
 	mlx_hook(gbl->mlx->mlx_win, 2, 1L >> 0, controls, gbl);
-	mlx_mouse_hook(gbl->mlx->mlx_win, mouse_pressed, gbl);
-	mlx_hook(gbl->mlx->mlx_win, 6, 1 << 6, mouse, gbl);
+	// mlx_mouse_hook(gbl->mlx->mlx_win, mouse_pressed, gbl);
+	// mlx_hook(gbl->mlx->mlx_win, 6, 1 << 6, mouse, gbl);
 	mlx_hook(gbl->mlx->mlx_win, 17, 0, destroy_window, gbl);
 	mlx_loop(gbl->mlx->mlx);
 	return (1);

@@ -6,7 +6,7 @@
 /*   By: maroly <maroly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 18:35:33 by hkovac            #+#    #+#             */
-/*   Updated: 2022/03/30 15:31:08 by maroly           ###   ########.fr       */
+/*   Updated: 2022/03/30 20:17:06 by maroly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,5 +103,15 @@ typedef struct s_pos
 	int		signy;
 	int		error[2];
 }	t_pos;
+
+typedef struct s_square
+{
+	int	x;
+	int	y;
+	unsigned int	color;
+	int	length;
+	int marge;
+}	t_square;
+
 
 #endif

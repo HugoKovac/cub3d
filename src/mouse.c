@@ -6,7 +6,7 @@
 /*   By: maroly <maroly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 14:53:56 by maroly            #+#    #+#             */
-/*   Updated: 2022/03/30 15:41:21 by maroly           ###   ########.fr       */
+/*   Updated: 2022/03/30 16:38:55 by maroly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,12 @@ int mouse(int x, int y, t_gbl *gbl)
 {
     (void)y;
     gbl->count++;
-    //printf("count = %d hide %d\n", gbl->count, gbl->is_mouse_hide);
-    if (gbl->is_mouse_hide == true && gbl->count == 10)
+    if (gbl->is_mouse_hide == true && gbl->count == 5)
     {
         if (x > WIDTH / 2)
             arrow_right(gbl);
         else if (x < WIDTH / 2)
             arrow_left(gbl);
-        //printf("x = %d y = %d\n", x, y);
         reframe(gbl);
         gbl->count = 0;
     }

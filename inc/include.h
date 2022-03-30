@@ -6,7 +6,7 @@
 /*   By: maroly <maroly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 18:36:24 by hkovac            #+#    #+#             */
-/*   Updated: 2022/03/30 15:40:23 by maroly           ###   ########.fr       */
+/*   Updated: 2022/03/30 16:40:16 by maroly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@
 # define F 4
 # define C 5
 
-# define WIDTH 400
-# define HEIGHT 400
+# define WIDTH 860
+# define HEIGHT 640
 
 # define PI 3.1415926
 

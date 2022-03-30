@@ -6,7 +6,7 @@
 /*   By: maroly <maroly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 18:48:21 by hkovac            #+#    #+#             */
-/*   Updated: 2022/03/30 15:35:39 by maroly           ###   ########.fr       */
+/*   Updated: 2022/03/30 17:36:26 by maroly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,4 +78,6 @@ char	*ft_convert_base(char *nbr, char *base_from, char *base_to);
 /*mouse.c*/
 int mouse(int x, int y, t_gbl *gbl);
 int mouse_pressed(int button, int x, int y, t_gbl *gbl);
+/*mini_map.c*/
+void    print_map(t_gbl *gbl);
 #endif
