@@ -6,7 +6,7 @@
 /*   By: maroly <maroly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 17:58:23 by hkovac            #+#    #+#             */
-/*   Updated: 2022/03/30 13:57:22 by maroly           ###   ########.fr       */
+/*   Updated: 2022/03/31 15:40:25 by maroly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ void	all_param2(t_gbl *gbl, int i)
 		gbl->tex_string[WE] = ft_strdup(gbl->file[i] + 3);
 	else if (ft_strncmp("EA ", gbl->file[i], 3) == 0)
 		gbl->tex_string[EA] = ft_strdup(gbl->file[i] + 3);
+	else if (ft_strncmp("DO ", gbl->file[i], 3) == 0)
+		gbl->tex_string[DO] = ft_strdup(gbl->file[i] + 3);
 	else if (ft_strncmp("F ", gbl->file[i], 2) == 0)
 		gbl->tex_string[F] = ft_strdup(gbl->file[i] + 2);
 	else if (ft_strncmp("C ", gbl->file[i], 2) == 0)
@@ -70,6 +72,11 @@ unsigned int rgb_hexa(char *str, t_gbl *gbl)
 	color.G = ft_convert_base(color.rgb[1], "0123456789", "0123456789abcdef");
 	color.B = ft_convert_base(color.rgb[2], "0123456789", "0123456789abcdef");
 	destroy_tab(color.rgb);
+	if (ft_atoi(color.R) > 255 || ft_atoi(color.R) < 0  || ft_atoi(color.G) > 255 || ft_atoi(color.G) < 0 ||  ft_atoi(color.B) > 255 || ft_atoi(color.B) < 0)
+	{
+		write (2, "Error\nProbleme with rgb code for F or C\n", ft_strlen("Error\nProbleme with rgb code for F or C\n"));
+		err_exit(gbl);
+	}
 	color.rg_hexa = ft_strcat(color.R, color.G);
 	free(color.R);
 	free(color.G);
@@ -78,8 +85,9 @@ unsigned int rgb_hexa(char *str, t_gbl *gbl)
 	free(color.rg_hexa);
 	color.rgb_dec = ft_convert_base(color.rgb_hexa, "0123456789abcdef", "0123456789");
 	free(color.rgb_hexa);
-	color.color = ft_atoi(color.rgb_dec,  gbl);
+	color.color = ft_atoi(color.rgb_dec);
 	free(color.rgb_dec);
+	
 	return (color.color);
 }
 
@@ -88,13 +96,13 @@ void	all_param(t_gbl *gbl)
 	int		i;
 
 	i = -1;
-	while (++i < 6)
+	while (++i < 7)
 		gbl->tex_string[i] = NULL;
 	i = -1;
 	while (gbl->file[++i] && &gbl->file[i] != gbl->map)
 		all_param2(gbl, i);
 	if (!gbl->tex_string[NO] || !gbl->tex_string[SO] || !gbl->tex_string[WE]
-		|| !gbl->tex_string[EA] || !gbl->tex_string[F] || !gbl->tex_string[C])
+		|| !gbl->tex_string[EA] || !gbl->tex_string[F] || !gbl->tex_string[C] || !gbl->tex_string[DO])
 	{
 		write (1, "Error\nNot enough texture id\n", ft_strlen("Error\nNot enough texture id\n"));
 		err_exit(gbl);
@@ -105,7 +113,7 @@ void	all_param(t_gbl *gbl)
 
 int	check_char(char c)
 {
-	if (c != '0' && c != '1' && c != 'N' && c != 'S' && c != 'E' && c != 'W')
+	if (c != '0' && c != '1' && c != 'N' && c != 'S' && c != 'E' && c != 'W' && c != '2')
 		return (1);
 	return (0);
 }

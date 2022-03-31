@@ -6,7 +6,7 @@
 /*   By: maroly <maroly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 18:48:21 by hkovac            #+#    #+#             */
-/*   Updated: 2022/03/31 02:41:58 by maroly           ###   ########.fr       */
+/*   Updated: 2022/03/31 15:32:32 by maroly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int		parse_map(t_gbl *gbl, char *file);
 int		err_exit(t_gbl *gbl);
 /*utils_str.c*/
 int		ft_strncmp(const char *s1, const char *s2, int n);
-int ft_atoi(const char *nptr, t_gbl *gbl);
+int ft_atoi(const char *nptr);
 /*check_cub.c*/
 void	all_param(t_gbl *gbl);
 int		check_char(char c);

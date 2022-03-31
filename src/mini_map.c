@@ -6,7 +6,7 @@
 /*   By: maroly <maroly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 16:52:03 by maroly            #+#    #+#             */
-/*   Updated: 2022/03/31 14:47:21 by maroly           ###   ########.fr       */
+/*   Updated: 2022/03/31 17:13:27 by maroly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,11 @@ void    print_map(t_gbl *gbl)
             if (gbl->map[y][x] == '1')
             {
                 sq.color = 0x000000;
+                print_square(sq, gbl, 0);
+            }
+            else if (gbl->map[y][x] == '2')
+            {
+                sq.color = 0x005F00;
                 print_square(sq, gbl, 0);
             }
             else if (gbl->map[y][x] != ' ')

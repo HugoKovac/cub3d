@@ -6,7 +6,7 @@
 /*   By: maroly <maroly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 15:09:37 by maroly            #+#    #+#             */
-/*   Updated: 2022/03/31 02:30:11 by maroly           ###   ########.fr       */
+/*   Updated: 2022/03/31 17:08:55 by maroly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,9 @@ static void trace_ray(t_rc *rc, t_gbl *gbl)
 		}
 		if(gbl->map[rc->mapY][rc->mapX] == '1')
 			rc->hit = 1;
+		if (gbl->map[rc->mapY][rc->mapX] == '2')
+			if ((rc->side == 1 && rc->sideY > 2.5000) || (rc->side == 0 && rc->sideX > 2.5000))
+				rc->hit = 2;
 	}
 	if (rc->side == 0)
 		rc->perpWall = rc->sideX - rc->deltaX;
@@ -90,9 +93,9 @@ unsigned int	rgb_file(char *str, t_gbl *gbl)
 	tmp = malloc(sizeof(unsigned int));
 	if (!tmp)
 		err_exit(gbl);
-	tmp[0] = ft_atoi(tab[0], gbl);
-	tmp[1] = ft_atoi(tab[1], gbl);
-	tmp[2] = ft_atoi(tab[2], gbl);
+	tmp[0] = ft_atoi(tab[0]);
+	tmp[1] = ft_atoi(tab[1]);
+	tmp[2] = ft_atoi(tab[2]);
 	color = *(unsigned int*)tmp;
 	free(tmp);
 	destroy_tab(tab);

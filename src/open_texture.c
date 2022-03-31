@@ -6,7 +6,7 @@
 /*   By: maroly <maroly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 10:02:13 by hkovac            #+#    #+#             */
-/*   Updated: 2022/03/30 14:01:30 by maroly           ###   ########.fr       */
+/*   Updated: 2022/03/31 15:37:22 by maroly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ void    open_texture(t_gbl *gbl)
     int     i;
 
     i = -1;
-    tex = malloc(sizeof(t_mlx *) * 4);
-    while (++i < 4)
+    tex = malloc(sizeof(t_mlx *) * 5);
+    while (++i < 5)
     {
         tex[i] = malloc(sizeof(t_mlx));
         *tex[i] = (t_mlx){0};
@@ -27,6 +27,7 @@ void    open_texture(t_gbl *gbl)
 	    tex[i]->img = mlx_xpm_file_to_image(tex[i]->mlx, gbl->tex_string[i], &tex[i]->texWidth, &tex[i]->texHeight);
         if (!tex[i]->img)
         {
+            printf("%s\n", gbl->tex_string[i]);
             write(1, "Error\nProblem when opening texture\n", ft_strlen("Error\nProblem when opening texture\n"));
             err_exit(gbl);
         }

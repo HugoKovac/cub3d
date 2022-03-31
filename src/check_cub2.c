@@ -6,7 +6,7 @@
 /*   By: maroly <maroly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 14:12:55 by maroly            #+#    #+#             */
-/*   Updated: 2022/03/28 17:19:52 by maroly           ###   ########.fr       */
+/*   Updated: 2022/03/31 17:40:20 by maroly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,27 @@ int check_map_vertical(t_gbl *gbl)
 	return (0);
 }
 
+int door_places(t_gbl *gbl)
+{
+	int x;
+	int y;
+
+	y = -1;
+	while (gbl->map[++y])
+	{
+		x = -1;
+		while (gbl->map[y][++x])
+			if (gbl->map[y][x] == '2')
+			{
+				if ((gbl->map[y][x - 1] == '1' && gbl->map[y][x + 1] == '1') || (gbl->map[y - 1][x] == '1' && gbl->map[y + 1][x] == '1'))
+					continue;
+				else
+					return (0);
+			}
+	}
+	return (1);
+}
+
 void check_map_form(t_gbl *gbl)
 {
 	if (check_map_horizontal(gbl) == 1)
@@ -114,9 +135,14 @@ void check_map_form(t_gbl *gbl)
 		write(2, "Error\nMap not closed\n", ft_strlen("Error\nMap not closed\n"));
 		err_exit(gbl);
 	}
-	// if (count_island(gbl) > 1)
-	// {
-	//	write(2, "Error\nToo many island\n", ft_strlen("Error\nToo many island\n"));
-	// 	err_exit(gbl);
-	// }
+	if (count_island(gbl) > 1)
+	{
+		write(2, "Error\nToo many island\n", ft_strlen("Error\nToo many island\n"));
+		err_exit(gbl);
+	}
+	if (door_places(gbl) == 0)
+	{
+		write(2, "Error\nBad door placement\n", ft_strlen("Error\nBad door placement\n"));
+		err_exit(gbl);
+	}
 }

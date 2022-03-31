@@ -6,18 +6,17 @@
 /*   By: maroly <maroly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 09:58:38 by hkovac            #+#    #+#             */
-/*   Updated: 2022/03/30 15:27:43 by maroly           ###   ########.fr       */
+/*   Updated: 2022/03/31 16:59:45 by maroly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-typedef int int32;
-typedef unsigned int Uint32;
 
 #include "include.h"
 
 int what_dir(t_gbl *gbl)
 {
-	if (gbl->rc->side == 0 && gbl->rc->rayDirX > 0)
+	if (gbl->rc->hit == 2)
+		return (DO);
+	else if (gbl->rc->side == 0 && gbl->rc->rayDirX > 0)
 		return (NO);
 	else if (gbl->rc->side == 0 && gbl->rc->rayDirX <= 0)
 		return (SO);

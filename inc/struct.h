@@ -6,7 +6,7 @@
 /*   By: maroly <maroly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 18:35:33 by hkovac            #+#    #+#             */
-/*   Updated: 2022/03/30 20:17:06 by maroly           ###   ########.fr       */
+/*   Updated: 2022/03/31 16:47:33 by maroly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,16 +81,19 @@ typedef struct s_gbl
 {
 	char	**map;
 	char	**file;
-	char	*tex_string[6];
+	char	*tex_string[7];
 	unsigned int sky;
 	unsigned int floor;
 	double	head;
 	double	horizon;
 	bool	is_mouse_hide;
 	int count;
+	int save_mapx;
+	int save_mapy;
 	t_mlx	*mlx;
 	t_rc	*rc;
 	t_mlx	**tex_tab;
+	int	test;
 }	t_gbl;
 
 typedef struct s_pos

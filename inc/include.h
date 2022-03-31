@@ -6,7 +6,7 @@
 /*   By: maroly <maroly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 18:36:24 by hkovac            #+#    #+#             */
-/*   Updated: 2022/03/31 11:39:57 by maroly           ###   ########.fr       */
+/*   Updated: 2022/03/31 15:23:32 by maroly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,11 @@
 # define SO 1
 # define WE 2
 # define EA 3
-# define F 4
-# define C 5
+# define DO 4
+# define F 5
+# define C 6
+
+# define DOOR
 
 # define WIDTH 860
 # define HEIGHT 640
