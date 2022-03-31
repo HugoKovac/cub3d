@@ -34,9 +34,6 @@ MLX_DIR = mlx
 MLX = libmlx.a 
 FLAGS2 = -lmlx -lm -lbsd -lX11 -lXext
 endif
-MLX_DIR = mlx_OG
-MLX = libmlx.a 
-FLAGS2 = -lmlx -framework OpenGL -framework Appkit
 
 # MLX_DIR = mlx_OG
 # MLX = libmlx.a 
@@ -46,7 +43,7 @@ FLAGS2 = -lmlx -framework OpenGL -framework Appkit
 # .a = lib static, les fonctions utilisees sont directement ecrite dans le binaire
 # .dylib = lib dynamique, les fonctions doivent etre chargees au momnent ou on lance le binaire
 
-CFLAGS = -Wall -Wextra -Werror -g -fsanitize=address
+CFLAGS = -Wall -Wextra -Werror -g #-fsanitize=address
 
 OBJ_DIR = obj
 SRC_DIR = src

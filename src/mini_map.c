@@ -6,7 +6,7 @@
 /*   By: maroly <maroly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 16:52:03 by maroly            #+#    #+#             */
-/*   Updated: 2022/03/31 02:29:02 by maroly           ###   ########.fr       */
+/*   Updated: 2022/03/31 14:47:21 by maroly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,10 @@ int is_pixel_around(t_gbl *gbl, int x, int y, t_square sq)
 {
     int dist;
     
-    dist = sqrt((gbl->rc->posX * sq.length + sq.marge - x) * (gbl->rc->posX
-        * sq.length + sq.marge - x) + (gbl->rc->posY * sq.length + sq.marge - y)
-        * (gbl->rc->posY * sq.length + sq.marge - y));
-    if (dist <= 8 * sq.length)
+    dist = sqrt((gbl->rc->posX * sq.length + sq.marge - sq.length / 6 - x) * (gbl->rc->posX
+        * sq.length + sq.marge - sq.length / 6 - x) + (gbl->rc->posY * sq.length + sq.marge - sq.length / 6 - y)
+        * (gbl->rc->posY * sq.length + sq.marge - sq.length / 6 - y));
+    if (dist <= 6 * sq.length)
         return (0);
     return (1);
 }
@@ -36,43 +36,25 @@ void    print_square(t_square sq, t_gbl *gbl, int sign)
         while (++x < sq.length)
         {
             if (sign == 0 && is_pixel_around(gbl, sq.x + x, sq.y + y, sq) == 0)
-                put_pixel_image(gbl->mlx, sq.x + x, sq.y + y, sq.color);
+                put_pixel_image(gbl->mlx, (75 + sq.length / 2) + (sq.x + x) - (gbl->rc->posX * sq.length + sq.marge - sq.length / 6), (75 + sq.length / 2) + (sq.y + y) - (gbl->rc->posY * sq.length + sq.marge - sq.length / 6), sq.color);
             else if (sign == 1)
-                put_pixel_image(gbl->mlx, sq.x + x, sq.y + y, sq.color);
+                put_pixel_image(gbl->mlx, 75 + x, 75 + y, sq.color);
         }
     }
 }
 
-int find_ratio(t_gbl *gbl)
+int find_ratio(void)
 {
-    int x;
-    int y;
-    int tmp;
     double r_mp;
-    double r_sq;
 
-    tmp = 0;
-    y = -1;
-    while (gbl->map[++y])
-    {
-        x = -1;
-        while (gbl->map[y][++x])
-            if (x > tmp)
-                tmp = x;
-    }
-    x = tmp;
     if (HEIGHT > WIDTH)
-        r_mp = HEIGHT / 3.5;
+        r_mp = HEIGHT / 100;
     else
-        r_mp = WIDTH / 3.5;
-    if (x > y)
-        r_sq = r_mp / x;
-    else
-        r_sq = r_mp / y;
-    return (r_sq);
+        r_mp = WIDTH / 100;
+    return (r_mp);
 }
 
-void    print_map(t_gbl *gbl) // todo : map mobile, player fixe
+void    print_map(t_gbl *gbl)
 {
     double r_sq;
     int y;
@@ -80,7 +62,8 @@ void    print_map(t_gbl *gbl) // todo : map mobile, player fixe
     t_square sq;
 
     y = -1;
-    r_sq = find_ratio(gbl);
+    r_sq = find_ratio();
+
     while (gbl->map[++y])
     {
         x = -1;
@@ -97,13 +80,13 @@ void    print_map(t_gbl *gbl) // todo : map mobile, player fixe
             }
             else if (gbl->map[y][x] != ' ')
             {
-                sq.color = 0xFFFFFF;
+                sq.color = 0x696969;
                 print_square(sq, gbl, 0);
             }
         }
     }
-    sq.x = gbl->rc->posX * r_sq + sq.marge;// - (gbl->rc->posX * 0.05);
-    sq.y = gbl->rc->posY * r_sq + sq.marge;// - (gbl->rc->posY * 0.05); // marqueur pas bien centre
+    sq.x = gbl->rc->posX * r_sq + sq.marge;// - r_sq / 8;
+    sq.y = gbl->rc->posY * r_sq + sq.marge;// - r_sq / 8;
     sq.length = r_sq / 2;
     sq.color = 0xFF0000;
     print_square(sq, gbl, 1);
