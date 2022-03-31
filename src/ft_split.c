@@ -6,7 +6,7 @@
 /*   By: maroly <maroly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/18 18:20:12 by maroly            #+#    #+#             */
-/*   Updated: 2022/03/29 20:35:05 by maroly           ###   ########.fr       */
+/*   Updated: 2022/03/31 19:30:42 by maroly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,31 +52,29 @@ static char	*put_str_in_tab(const char *s, char c)
 
 char	**ft_split(char const *s, char c, t_gbl *gbl)
 {
-	size_t	i;
-	size_t	string;
-	char	**tab;
+	t_split	a;
 
-	i = 0;
-	string = 0;
+	a.i = 0;
+	a.string = 0;
 	if (!s)
 		return (NULL);
-	tab = (char **) malloc(sizeof(*tab) * (create_tab(s, c) + 1));
-	if (tab == NULL)
+	a.tab = (char **) malloc(sizeof(*a.tab) * (create_tab(s, c) + 1));
+	if (a.tab == NULL)
 		return (NULL);
-	while (s[i])
+	while (s[a.i])
 	{
-		if (((i == 0 || s[i - 1] == c) && s[i] != c) && s[i])
+		if (((a.i == 0 || s[a.i - 1] == c) && s[a.i] != c) && s[a.i])
 		{
-			tab[string] = put_str_in_tab(&s[i], c);
-			if (!tab[string])
+			a.tab[a.string] = put_str_in_tab(&s[a.i], c);
+			if (!a.tab[a.string])
 			{
-				destroy_tab(tab);
+				destroy_tab(a.tab);
 				err_exit(gbl);
 			}
-			string++;
+			a.string++;
 		}
-		i++;
+		a.i++;
 	}
-	tab[string] = NULL;
-	return (tab);
+	a.tab[a.string] = NULL;
+	return (a.tab);
 }

@@ -1,64 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   count_island.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: maroly <maroly@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/03/31 18:20:08 by maroly            #+#    #+#             */
+/*   Updated: 2022/03/31 18:58:50 by maroly           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "include.h"
-
-void	free_tab(bool **tab, int row)
-{
-	int i = 0;
-
-	while (i < row)
-	{
-		free(tab[i]);
-		i++;
-	}
-	free(tab);
-}
-
-void	*ft_memset(void *s, int c, size_t n)
-{
-	size_t	i;
-
-	i = 0;
-	while (i < n)
-	{
-		((char *)s)[i] = c;
-		i++;
-	}
-	return (s);
-}
-
-int	ft_biglen(char **tab)
-{
-	int i;
-
-	i = 0;
-	while (tab[i])
-		i++;
-	return (i);
-}
-
-bool **init_map(t_gbl *gbl)
-{
-	bool **map;
-	int i;
-	int size;
-
-	i = -1;
-	size = ft_biglen(gbl->map);
-	map = malloc(sizeof(*map) * size);
-	if (!map)
-		err_exit(gbl);
-	while (gbl->map[++i])
-	{
-		size = ft_strlen(gbl->map[i]);
-		map[i] = malloc(sizeof(char *) * size);
-		if (!map[i])
-		{
-			free_tab(map, i);
-			err_exit(gbl);
-		}
-		ft_memset(map[i], 0, size);
-	}
-	return (map);
-}
 
 bool	is_in(bool **map, int i, int j, t_gbl *gbl)
 {
@@ -66,7 +18,8 @@ bool	is_in(bool **map, int i, int j, t_gbl *gbl)
 		return (true);
 	else if (j > 0 && map[i][j - 1] == true)
 		return (true);
-	else if (gbl->map[i + 1] && is_j_in(gbl->map[i + 1], j) == 0 && map[i + 1][j] == true)
+	else if (gbl->map[i + 1] && is_j_in(gbl->map[i + 1], j) == 0
+		&& map[i + 1][j] == true)
 		return (true);
 	else if (gbl->map[i][j + 1] && map[i][j + 1] == true)
 		return (true);
@@ -75,10 +28,10 @@ bool	is_in(bool **map, int i, int j, t_gbl *gbl)
 
 void	find_island(bool **map, t_gbl *gbl)
 {
-	int i;
-	int j;
-	int col;
-	int row;
+	int	i;
+	int	j;
+	int	col;
+	int	row;
 
 	i = -1;
 	row = ft_biglen(gbl->map);
@@ -87,21 +40,23 @@ void	find_island(bool **map, t_gbl *gbl)
 		j = -1;
 		col = ft_strlen(gbl->map[i]);
 		while (++j < col)
-			if (gbl->map[i][j] != ' ' && map[i][j] == false && is_in(map, i, j, gbl) == true)
+			if (gbl->map[i][j] != ' ' && map[i][j] == false
+				&& is_in(map, i, j, gbl) == true)
 				map[i][j] = true;
 		if (col > 0)
-		 	while (--col >= 0)
-		 		if (gbl->map[i][col] != ' ' && map[i][col] == false && is_in(map, i, col, gbl) == true)
-		 			map[i][col] = true;
-	 }
+			while (--col >= 0)
+				if (gbl->map[i][col] != ' ' && map[i][col] == false
+					&& is_in(map, i, col, gbl) == true)
+					map[i][col] = true;
+	}
 }
 
 int	count_island(t_gbl *gbl)
 {
-	bool **map;
-	int i;
-	int j;
-	t_island island;
+	bool		**map;
+	int			i;
+	int			j;
+	t_island	island;
 
 	i = -1;
 	island.count = 0;

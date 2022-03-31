@@ -6,7 +6,7 @@
 /*   By: maroly <maroly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/10 10:50:19 by maroly            #+#    #+#             */
-/*   Updated: 2022/03/30 03:02:42 by maroly           ###   ########.fr       */
+/*   Updated: 2022/03/31 18:25:41 by maroly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,11 +39,11 @@ int	ft_atoi_base(char *nbr, char *base)
 void	dec_to_base_to(long int nb, int size_of_base, char *str, char *base_to)
 {
 	int	i;
-	int sign;
+	int	sign;
 
 	i = len(nb, size_of_base);
 	sign = 0;
-	if (nb >=0 && nb <= 9)
+	if (nb >= 0 && nb <= 9)
 	{
 		sign = 1;
 		i++;

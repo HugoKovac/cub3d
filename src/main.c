@@ -6,16 +6,16 @@
 /*   By: maroly <maroly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 18:22:18 by hkovac            #+#    #+#             */
-/*   Updated: 2022/03/31 14:51:04 by maroly           ###   ########.fr       */
+/*   Updated: 2022/03/31 18:26:35 by maroly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "include.h"
 
-int main(int ac, char **av)
+int	main(int ac, char **av)
 {
-	t_gbl *gbl;
-	t_mlx *mlx;
+	t_gbl	*gbl;
+	t_mlx	*mlx;
 
 	if (ac != 2)
 		return (1);
@@ -24,7 +24,7 @@ int main(int ac, char **av)
 	gbl->horizon = 0.500000000;
 	mlx = malloc(sizeof(t_mlx));
 	*mlx = (t_mlx){0};
-	gbl->mlx = mlx;	
+	gbl->mlx = mlx;
 	parse_map(gbl, av[1]);
 	open_texture(gbl);
 	init_mlx(mlx, WIDTH, HEIGHT);

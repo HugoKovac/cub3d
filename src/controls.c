@@ -6,7 +6,7 @@
 /*   By: maroly <maroly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 10:05:14 by hkovac            #+#    #+#             */
-/*   Updated: 2022/03/31 02:40:49 by maroly           ###   ########.fr       */
+/*   Updated: 2022/03/31 18:56:10 by maroly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,70 +24,38 @@ void	head_down(t_gbl *gbl, int mult)
 	gbl->horizon -= 0.0156 * mult;
 }
 
-void	up(t_gbl *gbl)
-{
-	if (gbl->map[(int)(gbl->rc->posY + gbl->rc->dirY * gbl->rc->speed)][(int)gbl->rc->posX] != '1')
-		gbl->rc->posY = gbl->rc->posY + gbl->rc->dirY * gbl->rc->speed;
-	if (gbl->map[(int)gbl->rc->posY][(int)(gbl->rc->posX + gbl->rc->dirX * gbl->rc->speed)] != '1')
-		gbl->rc->posX = gbl->rc->posX + gbl->rc->dirX * gbl->rc->speed;
-}
-
-void	down(t_gbl *gbl)
-{
-	if (gbl->map[(int)(gbl->rc->posY - gbl->rc->dirY * gbl->rc->speed)][(int)gbl->rc->posX] != '1')
-		gbl->rc->posY = gbl->rc->posY - gbl->rc->dirY * gbl->rc->speed;
-	if (gbl->map[(int)gbl->rc->posY][(int)(gbl->rc->posX - gbl->rc->dirX * gbl->rc->speed)] != '1')
-		gbl->rc->posX = gbl->rc->posX - gbl->rc->dirX * gbl->rc->speed;
-}
-
-void left(t_gbl *gbl)
-{
-	if (gbl->map[(int)(gbl->rc->posY + (gbl->rc->dirX * sin(-PI / 2)) * (gbl->rc->speed / 2))][(int)gbl->rc->posX] != '1')
-		gbl->rc->posY += ((gbl->rc->dirX * sin(-PI / 2)) * (gbl->rc->speed / 2));
-	if (gbl->map[(int)gbl->rc->posY][(int)(gbl->rc->posX + (- gbl->rc->dirY * sin(-PI / 2)) * (gbl->rc->speed / 2))] != '1')
-		gbl->rc->posX += ((- gbl->rc->dirY * sin(-PI / 2)) * (gbl->rc->speed / 2));
-}
-
-void	right(t_gbl *gbl)
-{
-	if (gbl->map[(int)(gbl->rc->posY + (gbl->rc->dirX * sin(PI / 2)) * (gbl->rc->speed / 2))][(int)gbl->rc->posX] != '1')
-		gbl->rc->posY += ((gbl->rc->dirX * sin(PI / 2)) * (gbl->rc->speed / 2));
-	if (gbl->map[(int)gbl->rc->posY][(int)(gbl->rc->posX + (- gbl->rc->dirY * sin(PI / 2)) * (gbl->rc->speed / 2))] != '1')
-		gbl->rc->posX += ((- gbl->rc->dirY * sin(PI / 2)) * (gbl->rc->speed / 2));
-}
-
 void	arrow_left(t_gbl *gbl, int mult)
 {
-	double oldDirX = gbl->rc->dirX;
-	gbl->rc->dirX = gbl->rc->dirX * cos(-0.03 * mult) - gbl->rc-> dirY * sin(-0.03 * mult);
-	gbl->rc->dirY = oldDirX * sin(-0.03 * mult) + gbl->rc->dirY * cos(-0.03 * mult);
-	double oldPlaneX = gbl->rc->planeX;
-	gbl->rc->planeX = gbl->rc->planeX * cos(-0.03 * mult) - gbl->rc->planeY * sin(-0.03 * mult);
-	gbl->rc->planeY = oldPlaneX * sin(-0.03 * mult) + gbl->rc->planeY * cos(-0.03 * mult);
+	double	olddirx;
+	double	oldplanex;
+
+	olddirx = gbl->rc->dirx;
+	gbl->rc->dirx = gbl->rc->dirx * cos(-0.03 * mult)
+		- gbl->rc-> diry * sin(-0.03 * mult);
+	gbl->rc->diry = olddirx * sin(-0.03 * mult)
+		+ gbl->rc->diry * cos(-0.03 * mult);
+	oldplanex = gbl->rc->planex;
+	gbl->rc->planex = gbl->rc->planex * cos(-0.03 * mult)
+		- gbl->rc->planey * sin(-0.03 * mult);
+	gbl->rc->planey = oldplanex * sin(-0.03 * mult)
+		+ gbl->rc->planey * cos(-0.03 * mult);
 }
 
 void	arrow_right(t_gbl *gbl, int mult)
 {
-	double oldDirX = gbl->rc->dirX;
-	gbl->rc->dirX = gbl->rc->dirX * cos(0.03 * mult) - gbl->rc->dirY * sin(0.03 * mult);
-	gbl->rc->dirY = oldDirX * sin(0.03 * mult) + gbl->rc->dirY * cos(0.03 * mult);
-	double oldPlaneX = gbl->rc->planeX;
-	gbl->rc->planeX = gbl->rc->planeX * cos(0.03 * mult) - gbl->rc->planeY * sin(0.03 * mult);
-	gbl->rc->planeY = oldPlaneX * sin(0.03 * mult) + gbl->rc->planeY * cos(0.03 * mult);
-}
+	double	olddirx;
+	double	oldplanex;
 
-void	shift(t_gbl *gbl)
-{
-	if (gbl->rc->is_running == false)
-	{
-		gbl->rc->speed *= 1.6;
-		gbl->rc->is_running = true;
-	}
-	else
-	{
-		gbl->rc->speed /= 1.6;
-		gbl->rc->is_running = false;
-	}
+	olddirx = gbl->rc->dirx;
+	gbl->rc->dirx = gbl->rc->dirx * cos(0.03 * mult)
+		- gbl->rc->diry * sin(0.03 * mult);
+	gbl->rc->diry = olddirx * sin(0.03 * mult)
+		+ gbl->rc->diry * cos(0.03 * mult);
+	oldplanex = gbl->rc->planex;
+	gbl->rc->planex = gbl->rc->planex * cos(0.03 * mult)
+		- gbl->rc->planey * sin(0.03 * mult);
+	gbl->rc->planey = oldplanex * sin(0.03 * mult)
+		+ gbl->rc->planey * cos(0.03 * mult);
 }
 
 int	controls(int keycode, t_gbl *gbl)

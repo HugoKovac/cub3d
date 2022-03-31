@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hkovac <hkovac@student.42.fr>              +#+  +:+       +#+        */
+/*   By: maroly <maroly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 18:35:11 by hkovac            #+#    #+#             */
-/*   Updated: 2022/03/24 10:17:36 by hkovac           ###   ########.fr       */
+/*   Updated: 2022/03/31 19:03:15 by maroly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,34 +30,6 @@ void	count_malloc_tab2d(t_gbl *gbl, int fd)
 	gbl->file[count] = NULL;
 }
 
-void	fill_tab2d(t_gbl *gbl, int fd)
-{
-	int	i;
-
-	i = 0;
-	while (1)
-	{
-		gbl->file[i] = get_next_line(fd);
-		if (gbl->file[i] == NULL)
-			break ;
-		i++;
-	}
-	close (fd);
-}
-
-int	check_ext(char *file)
-{
-	int	i;
-
-	i = 0;
-	while (file[i])
-		i++;
-	if (i >= 4)//doit accepter seulement ".cub"?
-		if (ft_strncmp(file + (i - 4), ".cub", 4) == 0)
-			return (1);
-	return (0);
-}
-
 void	open_fd(t_gbl *gbl, int fd[2], char *file)
 {
 	fd[0] = open(file, O_RDONLY);
@@ -69,38 +41,38 @@ void	open_fd(t_gbl *gbl, int fd[2], char *file)
 	}
 }
 
-int    test_line(char *str)
+int	test_line(char *str)
 {
-    int i;
-    int    count;
-    
-    i = 0;
-    count = 0;
-    while (str[i])
-    {
-        if (str[i] == '1')
-            count++;
-        if (str[i] != '1' && str[i] != ' ')
-            return (0);
-        i++;
-    }
-    if (count < 1)
-        return (0);
-    return (1);
+	int	i;
+	int	count;
+
+	i = 0;
+	count = 0;
+	while (str[i])
+	{
+		if (str[i] == '1')
+			count++;
+		if (str[i] != '1' && str[i] != ' ')
+			return (0);
+		i++;
+	}
+	if (count < 1)
+		return (0);
+	return (1);
 }
 
-void find_map(t_gbl *gbl)
+void	find_map(t_gbl *gbl)
 {
-    int    i;
+	int	i;
 
-    i = 0;
-    while (gbl->file[i])
-    {
-        if (test_line(gbl->file[i]))
-            break ;
-        i++;
-    }
-    gbl->map = gbl->file + i;
+	i = 0;
+	while (gbl->file[i])
+	{
+		if (test_line(gbl->file[i]))
+			break ;
+		i++;
+	}
+	gbl->map = gbl->file + i;
 }
 
 int	parse_map(t_gbl *gbl, char *file)

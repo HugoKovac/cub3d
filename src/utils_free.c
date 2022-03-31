@@ -6,77 +6,76 @@
 /*   By: maroly <maroly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 15:48:50 by hkovac            #+#    #+#             */
-/*   Updated: 2022/03/31 17:00:17 by maroly           ###   ########.fr       */
+/*   Updated: 2022/03/31 18:39:51 by maroly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "include.h"
 
-void destroy_tex_mlx(t_mlx **tex_tab)
+void	destroy_tex_mlx(t_mlx **tex_tab)
 {
-    int    i;
+	int	i;
 
-    i = -1;
-    while (++i < 5)
+	i = -1;
+	while (++i < 5)
 	{
-        mlx_destroy_image(tex_tab[i]->mlx, tex_tab[i]->img);
-        mlx_destroy_display(tex_tab[i]->mlx);
+		mlx_destroy_image(tex_tab[i]->mlx, tex_tab[i]->img);
+		mlx_destroy_display(tex_tab[i]->mlx);
 		free(tex_tab[i]->mlx);
 		free(tex_tab[i]);
 	}
-    free(tex_tab);
+	free(tex_tab);
 }
 
-void destroy_mlx(t_mlx *mlx)
+void	destroy_mlx(t_mlx *mlx)
 {
-    if (mlx->mlx && mlx->img)
-        mlx_destroy_image(mlx->mlx, mlx->img);
-    if (mlx->mlx && mlx->mlx_win)
-        mlx_destroy_window(mlx->mlx, mlx->mlx_win);
-    if (mlx->mlx)
-        mlx_destroy_display(mlx->mlx);
-    if (mlx->mlx)
-        free(mlx->mlx);
-    free(mlx);    
+	if (mlx->mlx && mlx->img)
+		mlx_destroy_image(mlx->mlx, mlx->img);
+	if (mlx->mlx && mlx->mlx_win)
+		mlx_destroy_window(mlx->mlx, mlx->mlx_win);
+	if (mlx->mlx)
+		mlx_destroy_display(mlx->mlx);
+	if (mlx->mlx)
+		free(mlx->mlx);
+	free(mlx);
 }
 
-void destroy_tab(char **tab)
+void	destroy_tab(char **tab)
 {
-    int    i;
+	int	i;
 
-    i = -1;
-    if (tab)
-    {
-        while (tab[++i])
-            if (tab[i])
-                free(tab[i]);
-        free(tab);
-    }
-    tab = NULL;
+	i = -1;
+	if (tab)
+	{
+		while (tab[++i])
+			if (tab[i])
+				free(tab[i]);
+		free(tab);
+	}
+	tab = NULL;
 }
 
-void    destroy_tex(char *tab[6])
+void	destroy_tex(char *tab[6])
 {
-    int    i;
+	int	i;
 
-    i = -1;
-    while (++i < 7)
-    {
-        if (tab[i])
-            free(tab[i]);
-    }
+	i = -1;
+	while (++i < 7)
+	{
+		if (tab[i])
+			free(tab[i]);
+	}
 }
 
 int	end_free(t_gbl *gbl)
 {
 	if (gbl->file)
 		destroy_tab(gbl->file);
-	//if (gbl->tex_string)
-		destroy_tex(gbl->tex_string);
+	destroy_tex(gbl->tex_string);
 	if (gbl->tex_tab)
 		destroy_tex_mlx(gbl->tex_tab);
 	if (gbl->mlx)
 		destroy_mlx(gbl->mlx);
 	free(gbl);
 	return (0);
-}	
+}

@@ -5,14 +5,19 @@ SRC =	main.c \
 		utils_str.c utils_free.c \
 		check_cub.c	\
 		check_cub2.c	\
+		check_cub3.c	\
+		check_handv.c	\
 		count_island.c	\
+		count_island_utils.c	\
 		ray_casting.c \
+		ray_casting_utils.c \
 		draw.c \
 		open_texture.c \
 		texturing.c \
 		init_player.c \
 		utils_mlx.c \
 		controls.c \
+		controls_wasd.c \
 		ft_split.c	\
 		ft_convert_base.c\
 		ft_convert_base2.c\
@@ -43,7 +48,7 @@ endif
 # .a = lib static, les fonctions utilisees sont directement ecrite dans le binaire
 # .dylib = lib dynamique, les fonctions doivent etre chargees au momnent ou on lance le binaire
 
-CFLAGS = -Wall -Wextra -Werror -g #-fsanitize=address
+CFLAGS = -Wall -Wextra -Werror -g -fsanitize=address
 
 OBJ_DIR = obj
 SRC_DIR = src
