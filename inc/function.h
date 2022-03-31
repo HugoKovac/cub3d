@@ -6,7 +6,7 @@
 /*   By: maroly <maroly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 18:48:21 by hkovac            #+#    #+#             */
-/*   Updated: 2022/03/30 17:36:26 by maroly           ###   ########.fr       */
+/*   Updated: 2022/03/31 02:41:58 by maroly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,10 +51,6 @@ void	draw_line(t_pos beg, t_pos end, t_mlx *mlx, unsigned int color);
 void    put_pixel_image(t_mlx *mlx, int x, int y, unsigned int color);
 /*open_texture.c*/
 void    open_texture(t_gbl *gbl);
-/*controls.c*/
-int	controls(int keycode, t_gbl *gbl);
-void	arrow_right(t_gbl *gbl);
-void	arrow_left(t_gbl *gbl);
 /*texturing.c*/
 int		what_dir(t_gbl *gbl);
 void	stripe_tex(t_gbl *gbl, int x);
@@ -68,6 +64,10 @@ int	destroy_window(t_gbl *gbl);
 void	reframe(t_gbl *gbl);
 /*controls.c*/
 int	controls(int keycode, t_gbl *gbl);
+void	head_up(t_gbl *gbl, int mult);
+void	head_down(t_gbl *gbl, int mult);
+void	arrow_left(t_gbl *gbl, int mult);
+void	arrow_right(t_gbl *gbl, int mult);
 /*split.c*/
 char	**ft_split(char const *s, char c, t_gbl *gbl);
 /*ft_convert_base.c*/

@@ -6,7 +6,7 @@
 /*   By: maroly <maroly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 14:53:56 by maroly            #+#    #+#             */
-/*   Updated: 2022/03/30 16:38:55 by maroly           ###   ########.fr       */
+/*   Updated: 2022/03/31 02:41:22 by maroly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,22 @@
 
 int mouse(int x, int y, t_gbl *gbl)
 {
-    (void)y;
     gbl->count++;
     if (gbl->is_mouse_hide == true && gbl->count == 5)
     {
-        if (x > WIDTH / 2)
-            arrow_right(gbl);
-        else if (x < WIDTH / 2)
-            arrow_left(gbl);
+        if (x > WIDTH / 2)// && x - WIDTH / 2 > abs(y - HEIGHT - 2))
+            arrow_right(gbl, 2);
+        else if (x < WIDTH / 2 )//&& x - WIDTH / 2 > abs(y - HEIGHT - 2))
+            arrow_left(gbl, 2);
+        if (y > HEIGHT / 2)
+            head_down(gbl, 2);
+        else if (y < HEIGHT / 2)
+            head_up(gbl, 2);
         reframe(gbl);
         gbl->count = 0;
     }
     if (gbl->is_mouse_hide == true)
-        mlx_mouse_move(gbl->mlx->mlx, gbl->mlx->mlx_win, WIDTH / 2, HEIGHT / 2);
+        mlx_mouse_move(gbl->mlx->mlx_win, WIDTH / 2, HEIGHT / 2);
     return (1);
 }
 
@@ -38,14 +41,14 @@ int mouse_pressed(int button, int x, int y, t_gbl *gbl)
     {
         gbl->is_mouse_hide = true;
         gbl->count = 0;
-        mlx_mouse_hide(gbl->mlx->mlx, gbl->mlx->mlx_win);
-        mlx_mouse_move(gbl->mlx->mlx, gbl->mlx->mlx_win, WIDTH / 2, HEIGHT / 2);
+        mlx_mouse_hide(gbl->mlx->mlx_win);
+        mlx_mouse_move(gbl->mlx->mlx_win, WIDTH / 2, HEIGHT / 2);
     }
     else if (gbl->is_mouse_hide == true && button == 3)  
     {
         gbl->is_mouse_hide = false;
-        mlx_mouse_move(gbl->mlx->mlx, gbl->mlx->mlx_win, WIDTH / 2, HEIGHT / 2);
-        mlx_mouse_show(gbl->mlx->mlx, gbl->mlx->mlx_win);
+        mlx_mouse_move(gbl->mlx->mlx_win, WIDTH / 2, HEIGHT / 2);
+        mlx_mouse_show(gbl->mlx->mlx_win);
     }
     return (1);
 }

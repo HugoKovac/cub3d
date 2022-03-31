@@ -17,6 +17,7 @@ SRC =	main.c \
 		ft_convert_base.c\
 		ft_convert_base2.c\
 		mouse.c\
+		mini_map.c\
 
 NAME =	cub3d
 
@@ -33,6 +34,9 @@ MLX_DIR = mlx
 MLX = libmlx.a 
 FLAGS2 = -lmlx -lm -lbsd -lX11 -lXext
 endif
+MLX_DIR = mlx_OG
+MLX = libmlx.a 
+FLAGS2 = -lmlx -framework OpenGL -framework Appkit
 
 # MLX_DIR = mlx_OG
 # MLX = libmlx.a 

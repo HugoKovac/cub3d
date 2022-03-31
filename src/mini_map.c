@@ -6,15 +6,20 @@
 /*   By: maroly <maroly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 16:52:03 by maroly            #+#    #+#             */
-/*   Updated: 2022/03/30 21:14:26 by maroly           ###   ########.fr       */
+/*   Updated: 2022/03/31 02:29:02 by maroly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "include.h"
 
-int is_pixel_around(t_gbl *gbl, int x, int y, t_square sq) // seulement cote droit foncionnel, coe gauche chelou
+int is_pixel_around(t_gbl *gbl, int x, int y, t_square sq)
 {
-    if (fabs(gbl->rc->posX * sq.length + sq.marge - x) + fabs(gbl->rc->posY * sq.length + sq.marge - y) <= 8 * sq.length)
+    int dist;
+    
+    dist = sqrt((gbl->rc->posX * sq.length + sq.marge - x) * (gbl->rc->posX
+        * sq.length + sq.marge - x) + (gbl->rc->posY * sq.length + sq.marge - y)
+        * (gbl->rc->posY * sq.length + sq.marge - y));
+    if (dist <= 8 * sq.length)
         return (0);
     return (1);
 }
@@ -30,9 +35,10 @@ void    print_square(t_square sq, t_gbl *gbl, int sign)
         x = -1;
         while (++x < sq.length)
         {
-            if (sign == 0 && is_pixel_around(gbl, sq.x + x, sq.y + y, sq) == 1)
-                break;
-            put_pixel_image(gbl->mlx, sq.x + x, sq.y + y, sq.color);
+            if (sign == 0 && is_pixel_around(gbl, sq.x + x, sq.y + y, sq) == 0)
+                put_pixel_image(gbl->mlx, sq.x + x, sq.y + y, sq.color);
+            else if (sign == 1)
+                put_pixel_image(gbl->mlx, sq.x + x, sq.y + y, sq.color);
         }
     }
 }
