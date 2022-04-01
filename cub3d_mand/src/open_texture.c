@@ -6,7 +6,7 @@
 /*   By: maroly <maroly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 10:02:13 by hkovac            #+#    #+#             */
-/*   Updated: 2022/04/01 12:28:59 by maroly           ###   ########.fr       */
+/*   Updated: 2022/04/01 17:28:07 by maroly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ void	open_texture(t_gbl *gbl)
 				gbl->tex_string[i], &tex[i]->texwidth, &tex[i]->texheight);
 		if (!tex[i]->img)
 		{
-			printf("%s\n", gbl->tex_string[i]);
 			write(1, "Error\nProblem when opening texture\n",
 				ft_strlen("Error\nProblem when opening texture\n"));
 			err_exit(gbl);
