@@ -3,28 +3,44 @@ SRC =	main.c \
 		parse_map.c \
 		exit.c \
 		utils_str.c utils_free.c \
-		check_cub.c	\
-		check_cub2.c	\
-		check_cub3.c	\
+		check_cub.c	check_cub2.c check_cub3.c	\
 		check_handv.c	\
-		count_island.c	\
-		count_island_utils.c	\
-		ray_casting.c \
-		ray_casting_utils.c \
+		count_island.c	count_island_utils.c	\
+		ray_casting.c ray_casting_utils.c \
 		draw.c \
 		open_texture.c \
 		texturing.c \
 		init_player.c \
 		utils_mlx.c \
-		controls.c \
-		controls_wasd.c \
+		controls.c controls_wasd.c \
 		ft_split.c	\
-		ft_convert_base.c\
-		ft_convert_base2.c\
-		mouse.c\
-		mini_map.c\
+		ft_convert_base.c ft_convert_base2.c\
+
+
+SRC_BONUS =	main.c \
+		get_next_line.c get_next_line_u.c \
+		parse_map.c \
+		exit.c \
+		utils_str.c utils_free.c \
+		check_cub.c	check_cub2.c check_cub3.c	\
+		check_handv.c	\
+		count_island.c	count_island_utils.c	\
+		ray_casting.c ray_casting_utils.c \
+		draw.c \
+		open_texture.c \
+		texturing.c \
+		init_player.c \
+		utils_mlx.c \
+		controls.c controls_wasd.c \
+		ft_split.c	\
+		ft_convert_base.c ft_convert_base2.c \
+		mouse.c \
+		mini_map.c \
+
 
 NAME =	cub3d
+
+NAME_BONUS =	cub3d_bo
 
 UNAME :=	$(shell uname) 
 
@@ -32,7 +48,7 @@ CC = gcc
 
 ifeq ($(UNAME), Darwin)
 MLX_DIR = mlx_OG
-MLX = libmlx.a 
+MLX = libmlx.a
 FLAGS2 = -lmlx -framework OpenGL -framework Appkit
 else
 MLX_DIR = mlx
@@ -40,42 +56,49 @@ MLX = libmlx.a
 FLAGS2 = -lmlx -lm -lbsd -lX11 -lXext
 endif
 
-# MLX_DIR = mlx_OG
-# MLX = libmlx.a 
-# FLAGS2 = -lmlx -framework OpenGL -framework Appkit
-
-# diff entre .a et .dylib
-# .a = lib static, les fonctions utilisees sont directement ecrite dans le binaire
-# .dylib = lib dynamique, les fonctions doivent etre chargees au momnent ou on lance le binaire
+MAND_MLX_DIR = $(addprefix cub3d_mand/, $(MLX_DIR))
+BONUS_MLX_DIR = $(addprefix cub3d_bonus/, $(MLX_DIR))
+MAND_MLX = $(addprefix cub3d_mand/, $(MLX))
+BONUS_MLX = $(addprefix cub3d_bonus/, $(MLX))
 
 CFLAGS = -Wall -Wextra -Werror -g -fsanitize=address
 
-OBJ_DIR = obj
-SRC_DIR = src
-INC_DIR = inc
+OBJ_DIR = cub3d_mand/obj
+SRC_DIR = cub3d_mand/src
+INC_DIR = cub3d_mand/inc
+OBJ_DIR_BONUS = cub3d_bonus/obj
+SRC_DIR_BONUS = cub3d_bonus/src
+INC_DIR_BONUS = cub3d_bonus/inc
 
+OBJ_BONUS = $(addprefix $(OBJ_DIR_BONUS)/,$(SRC_BONUS:.c=.o))
 OBJ = $(addprefix $(OBJ_DIR)/,$(SRC:.c=.o))
+DPD_BONUS = $(addprefix $(OBJ_DIR_BONUS)/,$(SRC_BONUS:.c=.d))
 DPD = $(addprefix $(OBJ_DIR)/,$(SRC:.c=.d))
 
 .c.o:
 	${CC} ${CFLAGS} -c$< -o ${<:.c=.o}
 
-# -C faire make comme si on etait dans le dossier
-# -j multisreder / ameliore la vitesse de compliation
-# Pas de regle opti car makefile mlx pas compatible
 all: $(NAME)
 
-# permet de pouvoir comparer la derniere modification de la dep par rapport a la regle
-# -L donner le nom du dossier / -l donner le nom le la lib
-# loader path = ecrit le chemin de la mlx dans le binaire pour pouvoir la retrouver au moment ou on lance le binaire
-$(NAME): $(OBJ)
-		${CC} $(CFLAGS) -o $(NAME) $(OBJ) -L $(MLX_DIR) $(FLAGS2)
 
-# si le .c est plus recent que le .o on rentre dans la regle
+$(NAME): $(OBJ)
+		${CC} $(CFLAGS) -o $(NAME) $(OBJ) -L $(MAND_MLX_DIR) $(FLAGS2)
+
+
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | .gitignore
-		make -C $(MLX_DIR)
+		make -C $(MAND_MLX_DIR)
 		@mkdir -p $(OBJ_DIR)
-		${CC} $(CFLAGS) -I $(INC_DIR) -I $(MLX_DIR) -c $< -o $@
+		${CC} $(CFLAGS) -I $(INC_DIR) -I $(MAND_MLX_DIR) -c $< -o $@
+
+bonus: $(NAME_BONUS)
+
+$(NAME_BONUS): $(OBJ_BONUS)
+		${CC} $(CFLAGS) -o $(NAME_BONUS) $(OBJ_BONUS) -L $(BONUS_MLX_DIR) $(FLAGS2)
+
+$(OBJ_DIR_BONUS)/%.o: $(SRC_DIR_BONUS)/%.c | .gitignore
+		make -C $(BONUS_MLX_DIR)
+		@mkdir -p $(OBJ_DIR_BONUS)
+		${CC} $(CFLAGS) -I $(INC_DIR_BONUS) -I $(BONUS_MLX_DIR) -c $< -o $@
 
 .gitignore:
 		@echo $(NAME) > .gitignore
@@ -86,9 +109,16 @@ clean:
 fclean:	clean
 	@rm -rf $(NAME)
 
+clean_bonus:
+	@rm -rf $(OBJ_DIR_BONUS)
+
+fclean_bonus:	clean_bonus
+	@rm -rf $(NAME_BONUS)
+
 re: fclean all
 
-.PHONY: all, clean, fclean, re
+re_bonus: fclean_bonus bonus
 
-# Utilise les .d (et ignore s'ils n'existe pas)
+.PHONY: all, clean, fclean, re, bonus
+
 -include $(DPD)
