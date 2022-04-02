@@ -1,7 +1,7 @@
-NO ./cub3d_mand/WallPack/Blue5.xpm
-SO ./cub3d_mand/WallPack/Blue5.xpm
-EA ./cub3d_mand/WallPack/Blue5.xpm
-WE ./cub3d_mand/WallPack/Blue5.xpm
+NO ./WallPack/Blue5.xpm
+SO ./WallPack/Blue5.xpm
+EA ./WallPack/Blue5.xpm
+WE ./WallPack/Blue5.xpm
 F 33,33,33
 C 89,1,238
 

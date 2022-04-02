@@ -6,7 +6,7 @@
 /*   By: maroly <maroly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 18:35:11 by hkovac            #+#    #+#             */
-/*   Updated: 2022/03/31 19:03:15 by maroly           ###   ########.fr       */
+/*   Updated: 2022/04/02 21:22:00 by maroly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,9 @@ int	test_line(char *str)
 	count = 0;
 	while (str[i])
 	{
-		if (str[i] == '1')
+		if (check_char(str[i]) == 0 || str[i] == ' ')
 			count++;
-		if (str[i] != '1' && str[i] != ' ')
+		else
 			return (0);
 		i++;
 	}

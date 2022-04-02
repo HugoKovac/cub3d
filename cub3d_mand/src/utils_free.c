@@ -6,7 +6,7 @@
 /*   By: maroly <maroly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 15:48:50 by hkovac            #+#    #+#             */
-/*   Updated: 2022/04/01 12:29:07 by maroly           ###   ########.fr       */
+/*   Updated: 2022/04/02 20:53:18 by maroly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	destroy_tex_mlx(t_mlx **tex_tab)
 	while (++i < 4)
 	{
 		mlx_destroy_image(tex_tab[i]->mlx, tex_tab[i]->img);
-		mlx_destroy_display(tex_tab[i]->mlx);
+		//mlx_destroy_display(tex_tab[i]->mlx);
 		free(tex_tab[i]->mlx);
 		free(tex_tab[i]);
 	}
@@ -33,8 +33,8 @@ void	destroy_mlx(t_mlx *mlx)
 		mlx_destroy_image(mlx->mlx, mlx->img);
 	if (mlx->mlx && mlx->mlx_win)
 		mlx_destroy_window(mlx->mlx, mlx->mlx_win);
-	if (mlx->mlx)
-		mlx_destroy_display(mlx->mlx);
+	//if (mlx->mlx)
+	//	mlx_destroy_display(mlx->mlx);
 	if (mlx->mlx)
 		free(mlx->mlx);
 	free(mlx);
