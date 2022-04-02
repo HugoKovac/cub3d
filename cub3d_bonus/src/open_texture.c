@@ -6,7 +6,7 @@
 /*   By: maroly <maroly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 10:02:13 by hkovac            #+#    #+#             */
-/*   Updated: 2022/04/01 17:27:40 by maroly           ###   ########.fr       */
+/*   Updated: 2022/04/02 15:03:58 by maroly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ void	open_texture(t_gbl *gbl)
 	int		i;
 
 	i = -1;
-	tex = malloc(sizeof(t_mlx *) * 5);
-	while (++i < 5)
+	tex = malloc(sizeof(t_mlx *) * 6);
+	while (++i < 6)
 	{
 		tex[i] = malloc(sizeof(t_mlx));
 		*tex[i] = (t_mlx){0};

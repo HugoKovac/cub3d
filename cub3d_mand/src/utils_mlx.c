@@ -6,7 +6,7 @@
 /*   By: maroly <maroly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 10:03:25 by hkovac            #+#    #+#             */
-/*   Updated: 2022/04/01 12:36:30 by maroly           ###   ########.fr       */
+/*   Updated: 2022/04/02 15:04:07 by maroly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,4 @@ int	destroy_window(t_gbl *gbl)
 void	reframe(t_gbl *gbl)
 {
 	re_win(gbl);
-	start(gbl->rc, gbl);
-	mlx_put_image_to_window(gbl->mlx->mlx,
-		gbl->mlx->mlx_win, gbl->mlx->img, 0, 0);
 }

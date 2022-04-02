@@ -6,7 +6,7 @@
 /*   By: maroly <maroly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 17:58:23 by hkovac            #+#    #+#             */
-/*   Updated: 2022/03/31 19:10:49 by maroly           ###   ########.fr       */
+/*   Updated: 2022/04/02 14:10:21 by maroly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ void	all_param2(t_gbl *gbl, int i)
 		gbl->tex_string[EA] = ft_strdup(gbl->file[i] + 3);
 	else if (ft_strncmp("DO ", gbl->file[i], 3) == 0)
 		gbl->tex_string[DO] = ft_strdup(gbl->file[i] + 3);
+	else if (ft_strncmp("CL ", gbl->file[i], 3) == 0)
+		gbl->tex_string[CL] = ft_strdup(gbl->file[i] + 3);
 	else if (ft_strncmp("F ", gbl->file[i], 2) == 0)
 		gbl->tex_string[F] = ft_strdup(gbl->file[i] + 2);
 	else if (ft_strncmp("C ", gbl->file[i], 2) == 0)

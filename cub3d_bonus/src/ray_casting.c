@@ -6,7 +6,7 @@
 /*   By: maroly <maroly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 15:09:37 by maroly            #+#    #+#             */
-/*   Updated: 2022/03/31 19:04:51 by maroly           ###   ########.fr       */
+/*   Updated: 2022/04/02 15:25:07 by maroly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,28 @@ unsigned int	rgb_file(char *str, t_gbl *gbl)
 	return (color);
 }
 
+void	print_cloud(t_gbl *gbl)
+{
+	int	x;
+	int	y;
+	char *tmp;
+	unsigned int color;
+
+	y = -1;
+	while (++y < gbl->tex_tab[CL]->texheight)
+	{
+		x = -1;
+		while (++x < gbl->tex_tab[CL]->texwidth)
+		{
+			tmp = gbl->tex_tab[CL]->addr + (y * gbl->tex_tab[CL]->line_length + x * (gbl->tex_tab[CL]->bpp / 8));
+			color = *(unsigned int*)tmp;
+			if (color != 4278190080 && color != 15599110)
+				put_pixel_image(gbl->mlx, x + gbl->posxcloud, 50 + y + gbl->posycloud, color);
+		}
+	}
+	gbl->posxcloud += 0.15;
+}
+
 void	floor_sky(t_gbl *gbl)
 {
 	int	x;
@@ -73,9 +95,12 @@ void	floor_sky(t_gbl *gbl)
 			while (++x < WIDTH)
 				put_pixel_image(gbl->mlx, x, y, gbl->sky);
 		else
+		{
 			while (++x < WIDTH)
 				put_pixel_image(gbl->mlx, x, y, gbl->floor);
+		}
 	}
+	print_cloud(gbl);
 }
 
 void	start(t_rc *rc, t_gbl *gbl)
@@ -95,22 +120,10 @@ void	start(t_rc *rc, t_gbl *gbl)
 
 int	ray_casting(t_gbl *gbl)
 {
-	t_rc	rc;
-
-	gbl->rc = &rc;
-	if (!find_pos(gbl, &rc))
-		return (0);
-	init_dir(gbl, &rc);
-	gbl->rc->speed = 0.15;
-	gbl->rc->is_running = false;
-	start(&rc, gbl);
+	start(gbl->rc, gbl);
 	print_map(gbl);
 	mlx_put_image_to_window(gbl->mlx->mlx,
 		gbl->mlx->mlx_win, gbl->mlx->img, 0, 0);
-	mlx_hook(gbl->mlx->mlx_win, 2, 1L >> 0, controls, gbl);
-	mlx_mouse_hook(gbl->mlx->mlx_win, mouse_pressed, gbl);
-	mlx_hook(gbl->mlx->mlx_win, 6, 1 << 6, mouse, gbl);
-	mlx_hook(gbl->mlx->mlx_win, 17, 0, destroy_window, gbl);
-	mlx_loop(gbl->mlx->mlx);
+	//usleep(500000);
 	return (1);
 }

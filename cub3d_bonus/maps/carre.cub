@@ -3,6 +3,7 @@ SO ./WallPack/Blue5.xpm
 EA ./WallPack/Blue5.xpm
 WE ./WallPack/Blue5.xpm
 DO ./WallPack/Blue1.xpm
+CL ./WallPack/cloud.xpm
 F 33,33,33
 C 89,1,238
 
