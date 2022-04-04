@@ -6,7 +6,7 @@
 /*   By: maroly <maroly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 18:48:21 by hkovac            #+#    #+#             */
-/*   Updated: 2022/04/04 12:26:31 by maroly           ###   ########.fr       */
+/*   Updated: 2022/04/04 13:59:56 by maroly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,9 @@ int				ft_strncmp(const char *s1, const char *s2, int n);
 int				ft_atoi(const char *nptr);
 int				check_ext(char *file);
 void			fill_tab2d(t_gbl *gbl, int fd);
+char			*ft_strcat(char *s1, char *s2);
+/*utils_str2.c*/
+int				check_rgb(char **tab);
 /*check_cub.c*/
 void			all_param(t_gbl *gbl);
 int				check_char(char c);

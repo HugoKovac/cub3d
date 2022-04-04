@@ -6,7 +6,7 @@
 /*   By: maroly <maroly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 15:58:58 by hkovac            #+#    #+#             */
-/*   Updated: 2022/03/31 19:03:20 by maroly           ###   ########.fr       */
+/*   Updated: 2022/04/04 13:57:08 by maroly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,4 +77,30 @@ int	ft_atoi(const char *nptr)
 			i++;
 	}
 	return (result * sign);
+}
+
+char	*ft_strcat(char *s1, char *s2)
+{
+	int		i;
+	int		j;
+	char	*new;
+
+	i = 0;
+	j = 0;
+	new = malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1));
+	while (s1[i])
+	{
+		new[j] = s1[i];
+		j++;
+		i++;
+	}
+	i = 0;
+	while (s2[i])
+	{
+		new[j] = s2[i];
+		i++;
+		j++;
+	}
+	new[j] = 0;
+	return (new);
 }

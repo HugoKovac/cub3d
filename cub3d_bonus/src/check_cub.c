@@ -6,7 +6,7 @@
 /*   By: maroly <maroly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 17:58:23 by hkovac            #+#    #+#             */
-/*   Updated: 2022/04/02 21:23:01 by maroly           ###   ########.fr       */
+/*   Updated: 2022/04/04 14:00:10 by maroly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,32 +40,6 @@ void	all_param2(t_gbl *gbl, int i)
 	}
 }
 
-char	*ft_strcat(char *s1, char *s2)
-{
-	int		i;
-	int		j;
-	char	*new;
-
-	i = 0;
-	j = 0;
-	new = malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1));
-	while (s1[i])
-	{
-		new[j] = s1[i];
-		j++;
-		i++;
-	}
-	i = 0;
-	while (s2[i])
-	{
-		new[j] = s2[i];
-		i++;
-		j++;
-	}
-	new[j] = 0;
-	return (new);
-}
-
 void	free_color(t_color *color)
 {
 	free(color->r);
@@ -74,24 +48,8 @@ void	free_color(t_color *color)
 	free(color->rg_hexa);
 }
 
-unsigned int	rgb_hexa(char *str, t_gbl *gbl)
+unsigned int	rgb_hexa2(t_color color)
 {
-	t_color	color;
-
-	color.rgb = ft_split(str, ',', gbl);
-	color.r = ft_convert_base(color.rgb[0], "0123456789", "0123456789abcdef");
-	color.g = ft_convert_base(color.rgb[1], "0123456789", "0123456789abcdef");
-	color.b = ft_convert_base(color.rgb[2], "0123456789", "0123456789abcdef");
-	destroy_tab(color.rgb);
-	if (ft_atoi(color.r) > 255 || ft_atoi(color.r) < 0
-		|| ft_atoi(color.g) > 255
-		|| ft_atoi(color.g) < 0 || ft_atoi(color.b) > 255
-		|| ft_atoi(color.b) < 0)
-	{
-		write (2, "Error\nProbleme with rgb code for F or C\n",
-			ft_strlen("Error\nProbleme with rgb code for F or C\n"));
-		err_exit(gbl);
-	}
 	color.rg_hexa = ft_strcat(color.r, color.g);
 	color.rgb_hexa = ft_strcat(color.rg_hexa, color.b);
 	free_color(&color);
@@ -101,6 +59,33 @@ unsigned int	rgb_hexa(char *str, t_gbl *gbl)
 	color.color = ft_atoi(color.rgb_dec);
 	free(color.rgb_dec);
 	return (color.color);
+}
+
+unsigned int	rgb_hexa(char *str, t_gbl *gbl)
+{
+	t_color	color;
+
+	color.rgb = ft_split(str, ',', gbl);
+	if (check_rgb(color.rgb) == 1)
+	{
+		write(2, "Error\nRGB code incorrect\n",
+			ft_strlen("Error\nRGB code incorrect\n"));
+		err_exit(gbl);
+	}
+	if (ft_atoi(color.rgb[0]) > 255 || ft_atoi(color.rgb[0]) < 0
+		|| ft_atoi(color.rgb[1]) > 255
+		|| ft_atoi(color.rgb[1]) < 0 || ft_atoi(color.rgb[2]) > 255
+		|| ft_atoi(color.rgb[2]) < 0)
+	{
+		write (2, "Error\nProbleme with rgb code for F or C\n",
+			ft_strlen("Error\nProbleme with rgb code for F or C\n"));
+		err_exit(gbl);
+	}
+	color.r = ft_convert_base(color.rgb[0], "0123456789", "0123456789abcdef");
+	color.g = ft_convert_base(color.rgb[1], "0123456789", "0123456789abcdef");
+	color.b = ft_convert_base(color.rgb[2], "0123456789", "0123456789abcdef");
+	destroy_tab(color.rgb);
+	return (rgb_hexa2(color));
 }
 
 void	all_param(t_gbl *gbl)

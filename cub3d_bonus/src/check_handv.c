@@ -6,7 +6,7 @@
 /*   By: maroly <maroly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 19:22:57 by maroly            #+#    #+#             */
-/*   Updated: 2022/04/04 11:49:57 by maroly           ###   ########.fr       */
+/*   Updated: 2022/04/04 13:28:21 by maroly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,11 @@ int	check_map_horizontal2(t_gbl *gbl, int *i, int *j)
 	while (gbl->map[*i][*j] && gbl->map[*i][*j] != ' ')
 	{
 		if (check_char(gbl->map[*i][*j]) == 1)
-			return (1);
+		{
+			write(2, "Error\nUnknow character\n",
+				ft_strlen("Error\nUnknow character\n"));
+			err_exit(gbl);
+		}
 		(*j)++;
 	}
 	if (*i > 0 && gbl->map[*i][(*j) - 1] && gbl->map[*i][(*j) - 1] != '1')

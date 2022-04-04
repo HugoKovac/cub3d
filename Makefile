@@ -2,7 +2,7 @@ SRC =	main.c 									\
 		get_next_line.c get_next_line_u.c 		\
 		parse_map.c 							\
 		exit.c 									\
-		utils_str.c utils_free.c 				\
+		utils_str.c utils_free.c utils_str2.c	\
 		check_cub.c	check_cub2.c check_cub3.c	\
 		check_handv.c							\
 		count_island.c	count_island_utils.c	\
@@ -21,7 +21,7 @@ SRC_BONUS =	main.c 								\
 		get_next_line.c get_next_line_u.c 		\
 		parse_map.c 							\
 		exit.c 									\
-		utils_str.c utils_free.c 				\
+		utils_str.c utils_free.c utils_str2.c 	\
 		check_cub.c	check_cub2.c check_cub3.c	\
 		check_handv.c							\
 		count_island.c	count_island_utils.c	\
@@ -62,7 +62,7 @@ BONUS_MLX_DIR = $(addprefix cub3d_bonus/, $(MLX_DIR))
 MAND_MLX = $(addprefix cub3d_mand/, $(MLX))
 BONUS_MLX = $(addprefix cub3d_bonus/, $(MLX))
 
-CFLAGS = -Wall -Wextra -Werror -g #-fsanitize=address
+CFLAGS = -Wall -Wextra -Werror #-g -fsanitize=address
 
 OBJ_DIR = cub3d_mand/obj
 SRC_DIR = cub3d_mand/src
