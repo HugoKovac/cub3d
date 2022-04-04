@@ -6,7 +6,7 @@
 /*   By: maroly <maroly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 18:36:24 by hkovac            #+#    #+#             */
-/*   Updated: 2022/04/02 14:10:56 by maroly           ###   ########.fr       */
+/*   Updated: 2022/04/04 11:05:29 by maroly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@
 # define PI 3.1415926
 
 //MacOS
-# define UP 13
+/*# define UP 13
 # define DOWN 1
 # define LEFT 0
 # define RIGHT 2
@@ -41,10 +41,10 @@
 # define ESC 53
 # define SHIFT 257
 # define ARROW_UP 126
-# define ARROW_DOWN 125
+# define ARROW_DOWN 125*/
 
 //LINUX
-/*# define UP 119
+# define UP 119
 # define DOWN 115
 # define LEFT 97
 # define RIGHT 100
@@ -53,7 +53,7 @@
 # define ESC 65307
 # define SHIFT 65505
 # define ARROW_UP 65362
-# define ARROW_DOWN 65364*/
+# define ARROW_DOWN 65364
 # include <stdlib.h>
 # include <sys/types.h>
 # include <sys/uio.h>

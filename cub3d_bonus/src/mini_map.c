@@ -6,7 +6,7 @@
 /*   By: maroly <maroly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 16:52:03 by maroly            #+#    #+#             */
-/*   Updated: 2022/03/31 19:40:48 by maroly           ###   ########.fr       */
+/*   Updated: 2022/04/04 11:41:10 by maroly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,9 @@ void	print_square(t_square sq, t_gbl *gbl, int sign)
 		while (++x < sq.length)
 		{
 			if (sign == 0 && is_pixel_around(gbl, sq.x + x, sq.y + y, sq) == 0)
-				put_pixel_image(gbl->mlx, (75 + sq.length / 2) + (sq.x + x)
+				put_pixel_image(gbl->mlx, (75 + sq.length / 4) + (sq.x + x)
 					- (gbl->rc->posx * sq.length + sq.marge - sq.length / 6),
-					(75 + sq.length / 2) + (sq.y + y) - (gbl->rc->posy
+					(75 + sq.length / 4) + (sq.y + y) - (gbl->rc->posy
 						* sq.length + sq.marge - sq.length / 6), sq.color);
 			else if (sign == 1)
 				put_pixel_image(gbl->mlx, 75 + x, 75 + y, sq.color);
@@ -93,9 +93,7 @@ void	print_map(t_gbl *gbl)
 	{
 		x = -1;
 		while (gbl->map[y][++x])
-		{
 			print_map2(gbl, &sq, x, y);
-		}
 	}
 	sq.x = gbl->rc->posx * sq.r_sq + sq.marge;
 	sq.y = gbl->rc->posy * sq.r_sq + sq.marge;

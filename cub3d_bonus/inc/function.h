@@ -6,7 +6,7 @@
 /*   By: maroly <maroly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 18:48:21 by hkovac            #+#    #+#             */
-/*   Updated: 2022/03/31 19:24:48 by maroly           ###   ########.fr       */
+/*   Updated: 2022/04/04 12:26:31 by maroly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,6 @@ void			init_dir(t_gbl *gbl, t_rc *rc);
 /*utils_mlx.c*/
 void			re_win(t_gbl *gbl);
 int				destroy_window(t_gbl *gbl);
-void			reframe(t_gbl *gbl);
 /*controls.c*/
 int				controls(int keycode, t_gbl *gbl);
 void			head_up(t_gbl *gbl, int mult);
@@ -104,4 +103,7 @@ int				mouse(int x, int y, t_gbl *gbl);
 int				mouse_pressed(int button, int x, int y, t_gbl *gbl);
 /*mini_map.c*/
 void			print_map(t_gbl *gbl);
+/*background.c*/
+void			floor_sky(t_gbl *gbl);
+
 #endif

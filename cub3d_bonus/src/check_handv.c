@@ -6,7 +6,7 @@
 /*   By: maroly <maroly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 19:22:57 by maroly            #+#    #+#             */
-/*   Updated: 2022/04/02 21:25:31 by maroly           ###   ########.fr       */
+/*   Updated: 2022/04/04 11:49:57 by maroly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int	check_map_horizontal(t_gbl *gbl)
 
 int	check_map_vertical2(t_gbl *gbl, int *j)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (gbl->map[i])
@@ -64,7 +64,7 @@ int	check_map_vertical2(t_gbl *gbl, int *j)
 				|| gbl->map[i][*j] == ' '))
 			i++;
 		if (!gbl->map[i])
-			break;
+			break ;
 		if (is_j_in(gbl->map[i], *j) == 0 && gbl->map[i][*j] != '1')
 			return (1);
 		while (gbl->map[i] && is_j_in(gbl->map[i], *j) == 0

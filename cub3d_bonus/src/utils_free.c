@@ -6,7 +6,7 @@
 /*   By: maroly <maroly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 15:48:50 by hkovac            #+#    #+#             */
-/*   Updated: 2022/04/02 14:04:36 by maroly           ###   ########.fr       */
+/*   Updated: 2022/04/04 13:04:21 by maroly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,10 @@ void	destroy_tex_mlx(t_mlx **tex_tab)
 	int	i;
 
 	i = -1;
-	while (++i < 5)
+	while (++i < 6)
 	{
 		mlx_destroy_image(tex_tab[i]->mlx, tex_tab[i]->img);
-		//mlx_destroy_display(tex_tab[i]->mlx);
+		mlx_destroy_display(tex_tab[i]->mlx);
 		free(tex_tab[i]->mlx);
 		free(tex_tab[i]);
 	}
@@ -33,8 +33,8 @@ void	destroy_mlx(t_mlx *mlx)
 		mlx_destroy_image(mlx->mlx, mlx->img);
 	if (mlx->mlx && mlx->mlx_win)
 		mlx_destroy_window(mlx->mlx, mlx->mlx_win);
-	//if (mlx->mlx)
-	//	mlx_destroy_display(mlx->mlx);
+	if (mlx->mlx)
+		mlx_destroy_display(mlx->mlx);
 	if (mlx->mlx)
 		free(mlx->mlx);
 	free(mlx);
@@ -55,12 +55,12 @@ void	destroy_tab(char **tab)
 	tab = NULL;
 }
 
-void	destroy_tex(char *tab[6])
+void	destroy_tex(char *tab[8])
 {
 	int	i;
 
 	i = -1;
-	while (++i < 7)
+	while (++i < 8)
 	{
 		if (tab[i])
 			free(tab[i]);

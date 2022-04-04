@@ -6,7 +6,7 @@
 /*   By: maroly <maroly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 16:47:25 by maroly            #+#    #+#             */
-/*   Updated: 2022/03/31 18:25:23 by maroly           ###   ########.fr       */
+/*   Updated: 2022/04/04 11:49:13 by maroly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	init_mlx(t_mlx *mlx, int x, int y)
 	mlx->x_size = x;
 	mlx->y_size = y;
 	mlx->mlx = mlx_init();
-	mlx->mlx_win = mlx_new_window(mlx->mlx, x, y, "Cub3d");
+	mlx->mlx_win = mlx_new_window(mlx->mlx, x, y, "cub3D");
 	mlx->img = mlx_new_image(mlx->mlx, x, y);
 	mlx->addr = mlx_get_data_addr(mlx->img, &mlx->bpp,
 			&mlx->line_length, &mlx->endian);

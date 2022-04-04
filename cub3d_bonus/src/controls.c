@@ -6,7 +6,7 @@
 /*   By: maroly <maroly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 10:05:14 by hkovac            #+#    #+#             */
-/*   Updated: 2022/04/02 15:03:06 by maroly           ###   ########.fr       */
+/*   Updated: 2022/04/04 12:24:05 by maroly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,14 @@ void	head_up(t_gbl *gbl, int mult)
 {
 	gbl->head += 10 * mult;
 	gbl->horizon += 0.0156 * mult;
-	gbl->posycloud += 10;
+	gbl->posycloud += 10 * mult;
 }
 
 void	head_down(t_gbl *gbl, int mult)
 {
 	gbl->head -= 10 * mult;
 	gbl->horizon -= 0.0156 * mult;
-	gbl->posycloud -= 10;
+	gbl->posycloud -= 10 * mult;
 }
 
 void	arrow_left(t_gbl *gbl, int mult)
@@ -41,7 +41,7 @@ void	arrow_left(t_gbl *gbl, int mult)
 		- gbl->rc->planey * sin(-0.03 * mult);
 	gbl->rc->planey = oldplanex * sin(-0.03 * mult)
 		+ gbl->rc->planey * cos(-0.03 * mult);
-	gbl->posxcloud += 21;
+	gbl->posxcloud += 21 * mult;
 }
 
 void	arrow_right(t_gbl *gbl, int mult)
@@ -59,7 +59,7 @@ void	arrow_right(t_gbl *gbl, int mult)
 		- gbl->rc->planey * sin(0.03 * mult);
 	gbl->rc->planey = oldplanex * sin(0.03 * mult)
 		+ gbl->rc->planey * cos(0.03 * mult);
-	gbl->posxcloud -= 21;
+	gbl->posxcloud -= 21 * mult;
 }
 
 int	controls(int keycode, t_gbl *gbl)
@@ -84,6 +84,6 @@ int	controls(int keycode, t_gbl *gbl)
 		head_up(gbl, 1);
 	else if (keycode == ARROW_DOWN)
 		head_down(gbl, 1);
-	reframe(gbl);
+	re_win(gbl);
 	return (1);
 }
